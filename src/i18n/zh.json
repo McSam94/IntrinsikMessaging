@@ -1,0 +1,34 @@
+{
+  "screens": {
+    "login": {
+      "username": "用户名",
+      "password": "密码",
+      "signin": "登入",
+      "signup": "注册",
+      "validation": {
+        "username": "用户名不可空",
+        "password": "密码不可空"
+      }
+    },
+    "home": {
+      "title": "聊天",
+      "empty": "No chat found. Get started by messaging a friend."
+    },
+    "contact": {
+      "title": "Contact",
+      "empty": "No contact found. Invite your friend now"
+    },
+    "conversation": {
+      "read": "已读",
+      "unread": "未读"
+    }
+  },
+  "components": {
+    "list": {
+      "loading": "载入中..."
+    }
+  },
+  "general": {
+    "error": "Opps, Something went wrong :("
+  }
+}
