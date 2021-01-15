@@ -6,6 +6,7 @@ export const ConversationReducer = (state, action) => {
       return {
         ...state,
         isGettingList: true,
+        isGottenList: false,
         conversationErrorMsg: '',
       };
     case conversationAction.CONVERSATION_LIST.SUCCESS:
@@ -13,6 +14,9 @@ export const ConversationReducer = (state, action) => {
         ...state,
         isGettingList: false,
         isGottenList: true,
+        conversationTitle: action?.payload?.conversationTitle,
+        conversationAvatar: action?.payload?.conversationAvatar,
+        isGroupConversation: action?.payload?.isGroupConversation,
         conversationList: [
           ...state.conversationList,
           ...action?.payload?.conversationList,
@@ -26,6 +30,62 @@ export const ConversationReducer = (state, action) => {
         isGettingList: false,
         isGottenList: false,
         conversationErrorMsg: action?.payload?.conversationErrorMsg,
+      };
+    case conversationAction.NEW_CONVERSATION.REQUEST:
+      return {
+        ...state,
+        isCreating: true,
+        isCreated: false,
+        conversationErrorMsg: '',
+        conversationList: [],
+      };
+    case conversationAction.NEW_CONVERSATION.SUCCESS:
+      return {
+        ...state,
+        isCreating: false,
+        isCreated: true,
+        conversationId: action?.payload?.conversationId,
+        conversationTitle: action?.payload?.conversationTitle,
+        conversationAvatar: action?.payload?.conversationAvatar,
+        isGroupConversation: action?.payload?.isGroupConversation,
+      };
+    case conversationAction.NEW_CONVERSATION.FAIL:
+      return {
+        ...state,
+        isCreating: false,
+        isCreated: false,
+        conversationErrorMsg: action?.payload?.conversationErrorMsg,
+      };
+    case conversationAction.RESET_CONVERSATION:
+      return {
+        ...state,
+        isCreated: false,
+        conversationId: '',
+        conversationTitle: '',
+        conversattionAvatar: '',
+        conversationList: [],
+      };
+    case conversationAction.SEND_MESSAGE.REQUEST:
+      return {
+        ...state,
+        isSending: true,
+        isSent: false,
+      };
+    case conversationAction.SEND_MESSAGE.SUCCESS:
+      return {
+        ...state,
+        isSending: false,
+        isSent: true,
+        conversationList: [
+          action?.payload?.newConversation,
+          ...state.conversationList,
+        ],
+      };
+    case conversationAction.SEND_MESSAGE.FAIL:
+      return {
+        ...state,
+        isSending: false,
+        isSent: false,
       };
     default:
       return {

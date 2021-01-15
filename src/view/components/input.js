@@ -15,7 +15,20 @@ import { Controller } from 'react-hook-form';
 const ANIMATION_DURATION = 300;
 
 const Input = forwardRef(
-  ({ style, name, label, onChangeText, value, error, ...props }, ref) => {
+  (
+    {
+      style,
+      inputStyle,
+      label,
+      onChangeText,
+      value,
+      error,
+      underline,
+      shouldAnimate,
+      ...props
+    },
+    ref,
+  ) => {
     const { colorize } = useThemeColor();
     const shouldTop = useRef(new Animated.Value(value ? 1 : 0)).current;
     const [inputValue, setInputValue] = useState(value ?? '');
@@ -62,35 +75,50 @@ const Input = forwardRef(
         ref={ref}
         style={[
           styles.container,
-          {
-            borderBottomColor: colorize('border'),
-          },
+          underline
+            ? {
+                borderBottomWidth: 1,
+                borderBottomColor: colorize('border'),
+              }
+            : {},
           error ? styles.errorContainer : {},
           style,
         ]}>
-        <Animated.Text
-          style={[
-            styles.label,
-            // eslint-disable-next-line react-native/no-inline-styles
-            {
-              color: error
-                ? Colors.error
-                : isFocused
-                ? Colors.primary
-                : colorize('placeholder'),
-              backgroundColor:
-                isFocused || inputValue
-                  ? colorize('background')
-                  : 'transparent',
-              top: animatedLabelTop,
-              fontSize: animatedLabelFontSize,
-              zIndex: shouldTop,
-            },
-          ]}>
-          {label}
-        </Animated.Text>
+        {shouldAnimate && (
+          <Animated.Text
+            style={[
+              styles.label,
+              // eslint-disable-next-line react-native/no-inline-styles
+              {
+                color: error
+                  ? Colors.error
+                  : isFocused
+                  ? Colors.primary
+                  : colorize('placeholder'),
+                backgroundColor:
+                  isFocused || inputValue
+                    ? colorize('background')
+                    : 'transparent',
+              },
+              shouldAnimate
+                ? {
+                    top: animatedLabelTop,
+                    fontSize: animatedLabelFontSize,
+                    zIndex: shouldTop,
+                  }
+                : {},
+            ]}>
+            {label}
+          </Animated.Text>
+        )}
         <TextInput
-          style={styles.input}
+          style={[
+            styles.input,
+            {
+              color: colorize('text'),
+            },
+            inputStyle,
+          ]}
           onChangeText={onChange}
           value={inputValue}
           onFocus={() => onFocus(true)}
@@ -105,10 +133,18 @@ const Input = forwardRef(
 
 Input.propTypes = {
   style: PropTypes.object,
+  inputStyle: PropTypes.object,
   label: PropTypes.string,
   onChangeText: PropTypes.func,
   value: PropTypes.string,
   error: PropTypes.string,
+  underline: PropTypes.bool,
+  shouldAnimate: PropTypes.bool,
+};
+
+Input.defaultProps = {
+  underline: false,
+  shouldAnimate: false,
 };
 
 const ControlledInput = memo(
@@ -137,8 +173,6 @@ ControlledInput.propTypes = {
 const styles = StyleSheet.create({
   container: {
     height: 42,
-    borderBottomWidth: 1,
-    marginTop: 12,
   },
   errorContainer: {
     borderBottomColor: Colors.error,

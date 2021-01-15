@@ -7,7 +7,9 @@ export default Object.freeze({
     textError: Colors.error,
     placeholder: Colors.gray,
     background: Colors.white,
+    boxBackground: Colors.gray,
     border: Colors.gray,
+    barStyle: 'dark-content',
   },
   dark: {
     text: Colors.white,
@@ -15,6 +17,8 @@ export default Object.freeze({
     textError: Colors.error,
     placeholder: Colors.light,
     background: Colors.black,
+    boxBackground: Colors.darkGray,
     border: Colors.light,
+    barStyle: 'light-content',
   },
 });

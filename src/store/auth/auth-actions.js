@@ -19,11 +19,12 @@ export const login = (dispatch) => {
         const result = await AuthSrv.login(param);
 
         if (result.status === RESPONSE_STATUS.SUCCESS) {
-          const { token } = result?.data;
-          storeData('access_token', token);
+          const { token, user } = result?.data;
+          storeData('@token', token);
+          storeData('@user', user);
           dispatch({
             type: authAction.LOGIN.SUCCESS,
-            payload: { token },
+            payload: { token, user },
           });
         } else {
           dispatch({

@@ -1,27 +1,23 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { useThemeColor } from 'Stores/ui';
 import { FontSize } from 'Styles/typography';
-import Images from 'Assets/images';
 
 const ListItem = ({
   style,
   titleStyle,
   descriptionStyle,
-  avatar,
+  icon,
   title,
   description,
+  onClick,
 }) => {
   const { colorize } = useThemeColor();
 
   return (
-    <View style={[styles.listItem, style]}>
-      <Image
-        source={{ uri: avatar }}
-        defaultSource={Images.User}
-        style={styles.avatar}
-      />
+    <TouchableOpacity style={[styles.listItem, style]} onPress={onClick}>
+      {icon}
       <View style={styles.info}>
         <Text
           style={[
@@ -33,11 +29,19 @@ const ListItem = ({
           ]}>
           {title}
         </Text>
-        <Text style={[styles.description, descriptionStyle]} numberOfLines={1}>
+        <Text
+          style={[
+            styles.description,
+            {
+              color: colorize('text'),
+            },
+            descriptionStyle,
+          ]}
+          numberOfLines={1}>
           {description}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -52,12 +56,15 @@ const styles = StyleSheet.create({
     width: 50,
     borderRadius: 25,
     resizeMode: 'contain',
-    flex: 2,
+  },
+  icon: {
+    height: 50,
+    width: 50,
   },
   info: {
     flexDirection: 'column',
     justifyContent: 'space-around',
-    marginLeft: 12,
+    marginLeft: 14,
     flex: 8,
   },
   title: {
@@ -70,19 +77,10 @@ const styles = StyleSheet.create({
 });
 
 ListItem.propTypes = {
-  style: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.object),
-    PropTypes.object,
-  ]),
-  titleStyle: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.object),
-    PropTypes.object,
-  ]),
-  descriptionStyle: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.object),
-    PropTypes.object,
-  ]),
-  avatar: PropTypes.string,
+  style: PropTypes.object,
+  titleStyle: PropTypes.object,
+  descriptionStyle: PropTypes.object,
+  icon: PropTypes.node,
   title: PropTypes.string,
   description: PropTypes.string,
 };

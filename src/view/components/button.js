@@ -1,14 +1,17 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { useThemeColor } from 'Stores/ui';
 import { Colors, Shadow } from 'Styles/colors';
 
 const Button = ({ style, isLink, label, onClick, ...props }) => {
+  const { colorize } = useThemeColor();
+
   return (
     <TouchableOpacity
       style={[
         styles.container,
         {
-          backgroundColor: isLink ? Colors.white : Colors.primary,
+          backgroundColor: isLink ? colorize('background') : Colors.primary,
         },
         !isLink ? styles.primaryButton : {},
         style,

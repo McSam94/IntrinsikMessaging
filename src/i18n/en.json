@@ -20,7 +20,20 @@
     },
     "conversation": {
       "read": "read",
-      "unread": "unread"
+      "unread": "unread",
+      "empty": "No conversation found. Start chatting now.",
+      "type": "Type a message",
+      "image": "Image",
+      "file": "File",
+      "camera": "Camera",
+      "preview": "Preview",
+      "camera_unavailable": "Camera not available on device",
+      "permission": "Permission disabled"
+    },
+    "setting": {
+      "title": "Setting",
+      "dark": "Dark Mode",
+      "lang": "Language"
     }
   },
   "components": {

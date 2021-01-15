@@ -13,6 +13,7 @@ export const AuthReducer = (state, action) => {
         isLoggingIn: false,
         isLoggedIn: true,
         token: action?.payload?.token,
+        user: action?.payload.user,
       };
     case authAction.LOGIN.FAIL:
       return {
@@ -25,6 +26,7 @@ export const AuthReducer = (state, action) => {
         ...state,
         isLoggedIn: false,
         token: '',
+        user: {},
       };
     default:
       return {

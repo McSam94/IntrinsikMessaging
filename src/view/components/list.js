@@ -73,12 +73,10 @@ const List = ({
         <View style={styles.placeholder}>
           <Icon
             name={error ? 'error' : 'empty'}
-            style={[
-              styles.placeholderImg,
-              {
-                width,
-              },
-            ]}
+            style={{
+              ...styles.placeholderImg,
+              width,
+            }}
           />
           <Text
             style={[

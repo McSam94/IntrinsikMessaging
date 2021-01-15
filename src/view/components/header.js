@@ -1,39 +1,39 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { FontSize } from 'Styles/typography';
 import Icon from 'Components/icon';
 import { useThemeColor } from 'Stores/ui';
-import { Colors } from 'Styles/colors';
 
-const Header = ({ style, children, avatar, label, canBack, ...props }) => {
-  const { goBack } = useNavigation();
+const Header = ({ style, children, avatar, label, navigate, ...props }) => {
   const { colorize } = useThemeColor();
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        {canBack && (
+        {navigate && (
           <Icon
             name="leftArrow"
-            color={Colors.black}
+            color={colorize('text')}
             style={styles.icon}
-            onClick={() => goBack()}
+            onClick={navigate}
           />
         )}
-        {avatar && <Image source={{ uri: avatar }} style={styles.avatar} />}
-        <Text
-          style={[
-            styles.text,
-            {
-              color: colorize('text'),
-            },
-            style,
-          ]}
-          {...props}>
-          {label}
-        </Text>
+        <View style={styles.headerContent}>
+          {avatar}
+          <Text
+            style={[
+              styles.text,
+              {
+                color: colorize('text'),
+              },
+              style,
+            ]}
+            numberOfLines={1}
+            {...props}>
+            {label}
+          </Text>
+        </View>
       </View>
       {children}
     </View>
@@ -41,7 +41,7 @@ const Header = ({ style, children, avatar, label, canBack, ...props }) => {
 };
 
 Header.propTypes = {
-  style: PropTypes.string,
+  style: PropTypes.object,
   children: PropTypes.node,
 };
 
@@ -56,14 +56,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  avatar: {
-    height: 25,
-    width: 25,
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginStart: 12,
+    maxWidth: 250,
   },
   text: {
     fontSize: FontSize.XXXL,
     fontWeight: 'bold',
-    paddingHorizontal: 24,
   },
   icon: {
     width: 30,

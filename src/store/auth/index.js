@@ -15,7 +15,8 @@ export const { Context, Provider } = useReducerContext({
   initialState: {
     isLoggingIn: false,
     isLoggedIn: false,
-    token: getData('access_token'),
+    token: getData('@token'),
+    user: getData('@user'),
   },
   displayName: STORE_NAME,
 });

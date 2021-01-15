@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 });
 
 Loader.propTypes = {
-  style: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  style: PropTypes.object,
   size: PropTypes.oneOf(['large', 'small']),
   message: PropTypes.string,
   color: PropTypes.string,

@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from 'Screens/home';
 import ContactScreen from 'Screens/contact';
 import ConversationScreen from 'Screens/conversation';
+import SettingScreen from 'Screens/setting';
 
 const ProtectedStack = createStackNavigator();
 
@@ -15,6 +16,7 @@ const ProtectedRoute = () => {
         name="Conversation"
         component={ConversationScreen}
       />
+      <ProtectedStack.Screen name="Setting" component={SettingScreen} />
     </ProtectedStack.Navigator>
   );
 };

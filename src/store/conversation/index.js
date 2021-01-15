@@ -1,5 +1,10 @@
 import { useReducerContext } from 'Utils/hooks';
-import { getConversationList } from './conversation-actions';
+import {
+  newConversation,
+  getConversation,
+  resetConversation,
+  sendMessage,
+} from './conversation-actions';
 import { ConversationReducer } from './conversation-reducer';
 
 const STORE_NAME = 'ConversationStore';
@@ -8,11 +13,22 @@ const STORE_NAME = 'ConversationStore';
 export const { Context, Provider } = useReducerContext({
   reducer: ConversationReducer,
   actions: {
-    getConversationList,
+    newConversation,
+    getConversation,
+    resetConversation,
+    sendMessage,
   },
   initialState: {
     isGettingList: false,
     isGottenList: false,
+    isCreating: false,
+    isCreated: false,
+    isGroupConversation: false,
+    isSending: false,
+    isSent: false,
+    conversationId: '',
+    conversationTitle: '',
+    conversationAvatar: '',
     conversationList: [],
     conversationPage: 1,
     conversationErrorMsg: '',

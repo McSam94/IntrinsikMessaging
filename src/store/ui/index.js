@@ -7,6 +7,7 @@ import { Language } from 'Utils/constants';
 import { updateTheme, updateLang } from './ui-actions';
 import { UIReducer } from './ui-reducer';
 import Themes from 'Styles/theme';
+import { getName } from './ui-factory';
 
 const STORE_NAME = 'UIStore';
 
@@ -43,6 +44,8 @@ const useThemeColor = () => {
 const useTranslation = () => {
   const { lang } = useContext(Context);
 
+  const languageName = useMemo(() => getName(lang), [lang]);
+
   const translate = useCallback((key, config = {}) => i18n.t(key, config), []);
 
   const setTranslation = useCallback(
@@ -68,7 +71,7 @@ const useTranslation = () => {
     [lang],
   );
 
-  return { translate, setTranslation };
+  return { translate, languageName, setTranslation };
 };
 
 export { Context, Provider, useThemeColor, useTranslation };

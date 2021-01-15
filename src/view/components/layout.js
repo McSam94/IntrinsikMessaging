@@ -6,13 +6,13 @@ import { useThemeColor } from 'Stores/ui';
 import { Colors } from 'Styles/colors';
 
 const Layout = ({ statusBarColor, barStyle, children }) => {
-  const { colorize } = useThemeColor();
+  const { colorize, appTheme } = useThemeColor();
 
   return (
     <>
       <StatusBar
-        backgroundColor={statusBarColor ?? Colors.white}
-        barStyle={barStyle ?? 'dark-content'}
+        backgroundColor={statusBarColor ?? colorize('background')}
+        barStyle={barStyle ?? colorize('barStyle')}
       />
       <View
         style={[

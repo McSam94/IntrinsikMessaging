@@ -26,7 +26,7 @@ const Floating = ({ icon, onClick, style }) => {
 Floating.propTypes = {
   icon: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  style: PropTypes.oneOf([PropTypes.object, PropTypes.array]),
+  style: PropTypes.object,
 };
 
 const styles = StyleSheet.create({

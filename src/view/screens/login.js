@@ -7,8 +7,8 @@ import { Colors } from 'Styles/colors';
 import { FontSize } from 'Styles/typography';
 import Icon from 'Components/icon';
 import { ControlledInput } from 'Components/input';
-import StatusBar from 'Components/statusBar';
 import Button from 'Components/button';
+import Layout from 'Components/layout';
 import { name } from '../../../package.json';
 
 const Login = () => {
@@ -26,16 +26,21 @@ const Login = () => {
   );
 
   return (
-    <>
-      <StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
-      <View style={styles.container}>
+    <Layout>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: colorize('background'),
+          },
+        ]}>
         <View style={styles.logoContainer}>
           <Icon name="chat" color={Colors.washout} style={styles.logo} />
           <Text
             style={[
               styles.name,
               {
-                color: colorize('text'),
+                color: colorize('textWashOut'),
               },
             ]}>
             {name}
@@ -46,12 +51,13 @@ const Login = () => {
             style={[
               styles.title,
               {
-                color: colorize('text'),
+                color: colorize('textWashOut'),
               },
             ]}>
             {translate('screens.login.signin')}
           </Text>
           <ControlledInput
+            style={styles.input}
             name="username"
             control={control}
             rules={{
@@ -62,8 +68,11 @@ const Login = () => {
             }}
             label={translate('screens.login.username')}
             error={errors?.username?.message}
+            underline
+            shouldAnimate
           />
           <ControlledInput
+            style={styles.input}
             name="password"
             secureTextEntry
             control={control}
@@ -75,6 +84,8 @@ const Login = () => {
             }}
             label={translate('screens.login.password')}
             error={errors?.password?.message}
+            underline
+            shouldAnimate
           />
           <View style={styles.buttons}>
             <Button
@@ -90,7 +101,7 @@ const Login = () => {
           </View>
         </View>
       </View>
-    </>
+    </Layout>
   );
 };
 
@@ -110,6 +121,9 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     resizeMode: 'contain',
+  },
+  input: {
+    marginTop: 12,
   },
   name: {
     fontSize: FontSize.XL,

@@ -14,7 +14,7 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   async (config) => {
-    const token = (await getData('access_token')) ?? FAKE_TOKEN;
+    const token = (await getData('@token')) ?? FAKE_TOKEN;
 
     return {
       ...config,

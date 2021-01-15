@@ -6,6 +6,7 @@ export const Colors = Object.freeze({
   washout: '#8d99ae',
   white: '#ffffff',
   gray: '#e0e0e0',
+  darkGray: '#595959',
   light: '#ebebeb',
   error: '#ff4d4d',
 });

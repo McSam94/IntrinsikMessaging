@@ -15,12 +15,25 @@
       "empty": "No chat found. Get started by messaging a friend."
     },
     "contact": {
-      "title": "Contact",
+      "title": "联系",
       "empty": "No contact found. Invite your friend now"
     },
     "conversation": {
       "read": "已读",
-      "unread": "未读"
+      "unread": "未读",
+      "empty": "No conversation found. Start chatting now.",
+      "type": "输入信息",
+      "image": "图片",
+      "file": "文件",
+      "camera": "照相",
+      "preview": "预览",
+      "camera_unavailable": "Camera not available on device",
+      "permission": "Permission disabled"
+    },
+    "setting": {
+      "title": "设定",
+      "dark": "夜模式",
+      "lang": "语言"
     }
   },
   "components": {
