@@ -5,7 +5,7 @@ import Header from 'Components/header';
 import ListItem from 'Components/listItem';
 import Icon from 'Components/icon';
 import { useTranslation, useThemeColor } from 'Stores/ui';
-import { UiContext } from 'Stores';
+import { UiContext, AuthContext } from 'Stores';
 import { getData, storeData } from 'Utils/local-storage';
 import { StyleSheet } from 'react-native';
 
@@ -17,6 +17,7 @@ const Setting = () => {
   const { appTheme, colorize } = useThemeColor();
   const { translate, languageName } = useTranslation();
   const { updateTheme, updateLang, lang } = useContext(UiContext);
+  const { logout } = useContext(AuthContext);
 
   const updateThemeFn = useCallback(() => {
     const theme = getData('@theme') ?? 'light';
@@ -71,12 +72,10 @@ const Setting = () => {
         navigate={navigateBack}
       />
       <ListItem
-        style={[
-          styles.item,
-          {
-            borderBottomColor: colorize('border'),
-          },
-        ]}
+        style={{
+          ...styles.item,
+          borderBottomColor: colorize('border'),
+        }}
         icon={
           <Icon name={getIcon} color={colorize('text')} style={styles.icon} />
         }
@@ -85,18 +84,27 @@ const Setting = () => {
         onClick={updateThemeFn}
       />
       <ListItem
-        style={[
-          styles.item,
-          {
-            borderBottomColor: colorize('border'),
-          },
-        ]}
+        style={{
+          ...styles.item,
+          borderBottomColor: colorize('border'),
+        }}
         icon={
           <Icon name="earth" color={colorize('text')} style={styles.icon} />
         }
         title={translate('screens.setting.lang')}
         description={languageName}
         onClick={updateLangFn}
+      />
+      <ListItem
+        style={{
+          ...styles.item,
+          borderBottomColor: colorize('border'),
+        }}
+        icon={
+          <Icon name="logout" color={colorize('text')} style={styles.icon} />
+        }
+        title={translate('screens.setting.logout')}
+        onClick={logout}
       />
     </Layout>
   );

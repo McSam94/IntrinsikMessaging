@@ -33,7 +33,8 @@
     "setting": {
       "title": "Setting",
       "dark": "Dark Mode",
-      "lang": "Language"
+      "lang": "Language",
+      "logout": "Logout"
     }
   },
   "components": {

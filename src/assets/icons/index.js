@@ -6,7 +6,7 @@ import pen from './pen.svg';
 import leftArrow from './left-arrow.svg';
 import rightArrow from './right-arrow.svg';
 import send from './send.svg';
-import checkMark from './check-mark.svg';
+import tick from './tick.svg';
 import select from './select.svg';
 import group from './group.svg';
 import logout from './logout.svg';
@@ -30,7 +30,7 @@ export {
   leftArrow,
   rightArrow,
   send,
-  checkMark,
+  tick,
   select,
   group,
   logout,

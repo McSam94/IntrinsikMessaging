@@ -9,18 +9,16 @@ const Avatar = ({ style, isSelected, color, uri }) => {
   if (isSelected) {
     return (
       <Icon
-        name="checkMark"
+        name="tick"
         color={Colors.white}
         width="50%"
         height="50%"
-        style={[
-          styles.avatar,
-          styles.icon,
-          {
-            backgroundColor: color ?? Colors.primary,
-          },
-          style,
-        ]}
+        style={{
+          ...styles.avatar,
+          ...styles.icon,
+          backgroundColor: color ?? Colors.primary,
+          ...style,
+        }}
       />
     );
   }
@@ -32,14 +30,12 @@ const Avatar = ({ style, isSelected, color, uri }) => {
         color={Colors.white}
         width="50%"
         height="50%"
-        style={[
-          styles.avatar,
-          styles.icon,
-          {
-            backgroundColor: color ?? Colors.primary,
-          },
-          style,
-        ]}
+        style={{
+          ...styles.avatar,
+          ...styles.icon,
+          backgroundColor: color ?? Colors.primary,
+          ...style,
+        }}
       />
     );
   }

@@ -68,12 +68,10 @@ const Contact = () => {
               icon={<Avatar uri={contact?.avatar} isSelected={isSelected} />}
               title={contact?.name}
               description={contact?.mobile}
-              titleStyle={[
-                styles.name,
-                {
-                  color: colorize('text'),
-                },
-              ]}
+              titleStyle={{
+                ...styles.name,
+                color: colorize('text'),
+              }}
               descriptionStyle={styles.mobile}
               onClick={() => selectContact(contact, isSelected)}
             />

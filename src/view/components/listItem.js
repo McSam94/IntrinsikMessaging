@@ -19,27 +19,31 @@ const ListItem = ({
     <TouchableOpacity style={[styles.listItem, style]} onPress={onClick}>
       {icon}
       <View style={styles.info}>
-        <Text
-          style={[
-            styles.title,
-            {
-              color: colorize('textWashOut'),
-            },
-            titleStyle,
-          ]}>
-          {title}
-        </Text>
-        <Text
-          style={[
-            styles.description,
-            {
-              color: colorize('text'),
-            },
-            descriptionStyle,
-          ]}
-          numberOfLines={1}>
-          {description}
-        </Text>
+        {title && (
+          <Text
+            style={[
+              styles.title,
+              {
+                color: colorize('text'),
+              },
+              titleStyle,
+            ]}>
+            {title}
+          </Text>
+        )}
+        {description && (
+          <Text
+            style={[
+              styles.description,
+              {
+                color: colorize('text'),
+              },
+              descriptionStyle,
+            ]}
+            numberOfLines={1}>
+            {description}
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -50,6 +54,8 @@ const styles = StyleSheet.create({
     paddingVertical: 25,
     paddingHorizontal: 15,
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   avatar: {
     height: 50,
