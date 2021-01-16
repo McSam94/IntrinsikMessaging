@@ -92,7 +92,7 @@ const Input = forwardRef(
               {
                 color: error
                   ? Colors.error
-                  : isFocused
+                  : isFocused || !!inputValue
                   ? Colors.primary
                   : colorize('placeholder'),
                 backgroundColor:

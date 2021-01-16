@@ -16,7 +16,8 @@
     },
     "contact": {
       "title": "Contact",
-      "empty": "No contact found. Invite your friend now"
+      "empty": "No contact found. Invite your friend now",
+      "validate": "Please select at least one contact"
     },
     "conversation": {
       "read": "read",

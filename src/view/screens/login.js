@@ -51,7 +51,7 @@ const Login = () => {
             style={[
               styles.title,
               {
-                color: colorize('textWashOut'),
+                color: colorize('text'),
               },
             ]}>
             {translate('screens.login.signin')}
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   name: {
-    fontSize: FontSize.XL,
+    fontSize: FontSize.XXL,
     marginTop: 12,
   },
   form: {
@@ -135,8 +135,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   title: {
-    fontSize: FontSize.XXL,
+    fontSize: FontSize.XSL,
     fontWeight: 'bold',
+    marginBottom: 24,
   },
   buttons: {
     marginTop: 32,

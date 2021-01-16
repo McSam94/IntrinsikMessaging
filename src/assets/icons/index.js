@@ -1,7 +1,7 @@
 import clip from './clip.svg';
 import chat from './chat.svg';
-import error from './status/error.svg';
-import empty from './status/empty.svg';
+import errorStatus from './status/error.svg';
+import emptyStatus from './status/empty.svg';
 import pen from './pen.svg';
 import leftArrow from './left-arrow.svg';
 import rightArrow from './right-arrow.svg';
@@ -20,12 +20,15 @@ import file from './file.svg';
 import camera from './camera.svg';
 import cancel from './cancel.svg';
 import download from './download.svg';
+import info from './info.svg';
+import success from './success.svg';
+import error from './error.svg';
 
 export {
   clip,
   chat,
-  error,
-  empty,
+  errorStatus,
+  emptyStatus,
   pen,
   leftArrow,
   rightArrow,
@@ -44,4 +47,7 @@ export {
   camera,
   cancel,
   download,
+  info,
+  success,
+  error,
 };

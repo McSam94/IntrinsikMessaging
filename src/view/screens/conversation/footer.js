@@ -22,6 +22,10 @@ const Footer = ({
   const [message, setMessage] = useState('');
 
   const sendMessageFn = useCallback(() => {
+    if (message === '') {
+      return;
+    }
+
     if (onSendMessage) {
       onSendMessage(message);
     }

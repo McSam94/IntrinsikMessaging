@@ -18,9 +18,12 @@ const Message = ({ user, image, message, file, timestamp, isRead }) => {
       <View
         style={[
           styles.box,
-          {
-            backgroundColor: colorize('boxBackground'),
-          },
+          isMe
+            ? {
+                ...styles.messageBoxMe,
+                backgroundColor: colorize('background'),
+              }
+            : styles.messageBoxOther,
         ]}>
         {!isMe && <Text style={styles.messageUser}>{user}</Text>}
         <View style={styles.messageContainer}>
@@ -38,35 +41,17 @@ const Message = ({ user, image, message, file, timestamp, isRead }) => {
             />
           )}
           {message !== '' && (
-            <Text
-              style={[
-                styles.message,
-                {
-                  color: colorize('text'),
-                },
-              ]}>
+            <Text style={[styles.message, isMe ? styles.messageMe : {}]}>
               {message}
             </Text>
           )}
         </View>
         <View style={styles.messageInfo}>
-          <Text
-            style={[
-              styles.time,
-              {
-                color: colorize('textWashOut'),
-              },
-            ]}>
+          <Text style={[styles.time, isMe ? styles.timeMe : {}]}>
             {timestamp}
           </Text>
           {isMe && (
-            <Text
-              style={[
-                styles.read,
-                {
-                  color: colorize('textWashOut'),
-                },
-              ]}>
+            <Text style={[styles.read, isMe ? styles.readMe : {}]}>
               {isRead
                 ? translate('screens.conversation.read')
                 : translate('screens.conversation.unread')}
@@ -82,6 +67,7 @@ const styles = StyleSheet.create({
   row: {
     display: 'flex',
     flexDirection: 'row',
+    paddingHorizontal: 8,
   },
   box: {
     paddingVertical: 8,
@@ -92,8 +78,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 280,
   },
+  messageBoxMe: {
+    borderWidth: 2,
+    borderColor: Colors.primary,
+  },
+  messageBoxOther: {
+    backgroundColor: Colors.primary,
+  },
   messageUser: {
-    color: Colors.secondary,
+    color: Colors.white,
+    fontWeight: 'bold',
     marginBottom: 8,
   },
   messageContainer: {
@@ -108,6 +102,10 @@ const styles = StyleSheet.create({
   },
   message: {
     fontSize: FontSize.XL,
+    color: Colors.white,
+  },
+  messageMe: {
+    color: Colors.primary,
   },
   fileMessage: {
     borderWidth: 1,
@@ -120,9 +118,17 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: FontSize.S,
+    color: Colors.white,
+  },
+  timeMe: {
+    color: Colors.primary,
+  },
+  readMe: {
+    color: Colors.primary,
   },
   read: {
     fontSize: FontSize.S,
+    color: Colors.white,
     marginStart: 12,
   },
   left: {

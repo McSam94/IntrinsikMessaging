@@ -5,6 +5,7 @@ import { useThemeColor } from 'Stores/ui';
 import * as SvgCollections from 'Assets/icons';
 
 const Icon = ({
+  testID,
   name,
   color,
   style,
@@ -21,7 +22,10 @@ const Icon = ({
   return (
     <>
       {onClick ? (
-        <TouchableOpacity style={[styles.container, style]} onPress={onClick}>
+        <TouchableOpacity
+          testID={testID ?? 'icon'}
+          style={[styles.container, style]}
+          onPress={onClick}>
           <DynamicIcon
             fill={color}
             height={height ?? '100%'}
@@ -68,6 +72,7 @@ const Icon = ({
 };
 
 Icon.propTypes = {
+  testID: PropTypes.string,
   style: PropTypes.object,
   name: PropTypes.string,
   color: PropTypes.string,

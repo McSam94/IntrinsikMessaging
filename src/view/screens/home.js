@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation, useThemeColor } from 'Stores/ui';
-import { ChatContext, AuthContext } from 'Stores';
+import { ChatContext } from 'Stores';
 import Header from 'Components/header';
 import List from 'Components/list';
 import Floating from 'Components/floating';
@@ -18,7 +18,6 @@ const Home = () => {
   const { chatList, getChatList, chatErrorMsg, isGettingList } = useContext(
     ChatContext,
   );
-  const { logout } = useContext(AuthContext);
 
   const renderListItem = ({ item }) => {
     return (

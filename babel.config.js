@@ -15,6 +15,7 @@ module.exports = {
           Styles: './src/styles',
           i18n: './src/i18n',
           Services: './src/services',
+          Test: './src/jest',
         },
       },
     ],

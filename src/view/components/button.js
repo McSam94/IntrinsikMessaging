@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
+import PropTypes from 'prop-types';
 import { useThemeColor } from 'Stores/ui';
 import { Colors, Shadow } from 'Styles/colors';
 
-const Button = ({ style, isLink, label, onClick, ...props }) => {
+const Button = ({ testID, style, isLink, label, onClick, ...props }) => {
   const { colorize } = useThemeColor();
 
   return (
     <TouchableOpacity
+      testID={testID ?? 'button'}
       style={[
         styles.container,
         {
@@ -44,4 +46,12 @@ const styles = StyleSheet.create({
   label: {},
 });
 
-export default Button;
+Button.propTypes = {
+  testID: PropTypes.string,
+  style: PropTypes.object,
+  isLink: PropTypes.bool,
+  label: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+export default memo(Button);

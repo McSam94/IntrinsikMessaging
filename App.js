@@ -1,9 +1,10 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Text } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { Providers } from 'Stores';
 import Navigation from 'Navigation';
+import { TOAST_CONFIG } from 'Utils/constants';
 
 const App = () => {
   return (
@@ -11,7 +12,7 @@ const App = () => {
       <SafeAreaProvider>
         <Providers>
           <Navigation />
-          <Toast ref={(ref) => Toast.setRef(ref)} />
+          <Toast config={TOAST_CONFIG} ref={(ref) => Toast.setRef(ref)} />
         </Providers>
       </SafeAreaProvider>
     </Suspense>

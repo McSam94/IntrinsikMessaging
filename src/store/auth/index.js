@@ -1,7 +1,6 @@
 import { useReducerContext } from 'Utils/hooks';
-import { login, logout } from './auth-actions';
+import { login, logout, init } from './auth-actions';
 import { AuthReducer } from './auth-reducer';
-import { getData } from 'Utils/local-storage';
 
 const STORE_NAME = 'AuthStore';
 
@@ -9,14 +8,17 @@ const STORE_NAME = 'AuthStore';
 export const { Context, Provider } = useReducerContext({
   reducer: AuthReducer,
   actions: {
+    init,
     login,
     logout,
   },
   initialState: {
+    isInitializing: false,
+    isInitialized: false,
     isLoggingIn: false,
     isLoggedIn: false,
-    token: getData('@token'),
-    user: getData('@user'),
+    token: '',
+    user: '',
   },
   displayName: STORE_NAME,
 });

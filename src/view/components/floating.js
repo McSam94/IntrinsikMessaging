@@ -5,16 +5,17 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'Components/icon';
 import { Colors, Shadow } from 'Styles/colors';
 
-const Floating = ({ icon, onClick, style }) => {
-  const insets = useSafeAreaInsets();
+const Floating = ({ testID, icon, onClick, style }) => {
+  const { bottom } = useSafeAreaInsets();
 
   return (
     <TouchableOpacity
+      testID={testID ?? 'floating'}
       onPress={onClick}
       style={[
         styles.button,
         {
-          bottom: 12 + insets.bottom,
+          bottom: 12 + bottom,
         },
         style,
       ]}>
@@ -24,6 +25,7 @@ const Floating = ({ icon, onClick, style }) => {
 };
 
 Floating.propTypes = {
+  testID: PropTypes.string,
   icon: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   style: PropTypes.object,

@@ -1,7 +1,7 @@
 export const Colors = Object.freeze({
-  primary: '#74d3ae',
-  secondary: '#678d58',
-  tertiary: '#a6c48a',
+  primary: '#38a3a5',
+  secondary: '#57cc99',
+  tertiary: '#80ed99',
   black: '#000000',
   washout: '#8d99ae',
   white: '#ffffff',
@@ -9,6 +9,7 @@ export const Colors = Object.freeze({
   darkGray: '#595959',
   light: '#ebebeb',
   error: '#ff4d4d',
+  info: '#3399ff',
 });
 
 export const Gradients = Object.freeze({

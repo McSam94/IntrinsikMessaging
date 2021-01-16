@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { FontSize } from 'Styles/typography';
 import Icon from 'Components/icon';
+import Avatar from 'Components/avatar';
 import { useThemeColor } from 'Stores/ui';
 
 const Header = ({ style, children, avatar, label, navigate, ...props }) => {
@@ -13,6 +14,7 @@ const Header = ({ style, children, avatar, label, navigate, ...props }) => {
       <View style={styles.titleContainer}>
         {navigate && (
           <Icon
+            testID="header-navigate"
             name="leftArrow"
             color={colorize('text')}
             style={styles.icon}
@@ -22,6 +24,7 @@ const Header = ({ style, children, avatar, label, navigate, ...props }) => {
         <View style={styles.headerContent}>
           {avatar}
           <Text
+            testID="header-title"
             style={[
               styles.text,
               {
@@ -61,6 +64,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginStart: 12,
     maxWidth: 250,
+  },
+  avatar: {
+    height: 40,
+    width: 40,
   },
   text: {
     fontSize: FontSize.XXXL,

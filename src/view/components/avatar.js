@@ -5,10 +5,11 @@ import Images from 'Assets/images';
 import Icon from 'Components/icon';
 import { Colors } from 'Styles/colors';
 
-const Avatar = ({ style, isSelected, color, uri }) => {
+const Avatar = ({ testID, style, isSelected, color, uri }) => {
   if (isSelected) {
     return (
       <Icon
+        testID="avatar-selected"
         name="tick"
         color={Colors.white}
         width="50%"
@@ -26,6 +27,7 @@ const Avatar = ({ style, isSelected, color, uri }) => {
   if (!uri) {
     return (
       <Icon
+        testID="avatar-default"
         name="group"
         color={Colors.white}
         width="50%"
@@ -42,6 +44,7 @@ const Avatar = ({ style, isSelected, color, uri }) => {
 
   return (
     <Image
+      testID={testID ?? 'avatar'}
       source={{ uri }}
       defaultSource={Images.User}
       style={[styles.avatar, style]}
@@ -63,8 +66,10 @@ const styles = StyleSheet.create({
 });
 
 Avatar.propTypes = {
+  testID: PropTypes.string,
   isSelected: PropTypes.bool,
   uri: PropTypes.string,
+  color: PropTypes.string,
 };
 
 export default memo(Avatar);

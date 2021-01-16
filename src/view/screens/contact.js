@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 import { ContactContext } from 'Stores';
 import { useTranslation, useThemeColor } from 'Stores/ui';
 import { transformContact } from 'Stores/contact';
@@ -46,6 +47,26 @@ const Contact = () => {
       });
     }
   }, []);
+
+  const startConversation = useCallback(() => {
+    if (selectedContacts.length <= 0) {
+      Toast.show({
+        type: 'error',
+        text1: translate('screens.contact.validate'),
+      });
+      return;
+    }
+
+    navigate('Conversation', {
+      contactIds: selectedContacts.map((contact) => contact.id),
+      name:
+        selectedContacts.length > 1
+          ? getGroupName(selectedContacts)
+          : selectedContacts?.[0]?.name,
+      avatar:
+        selectedContacts.length > 1 ? null : selectedContacts?.[0]?.avatar,
+    });
+  }, [navigate, selectedContacts, translate]);
 
   const navigateBack = useCallback(() => {
     if (canGoBack) {
@@ -96,19 +117,7 @@ const Contact = () => {
           name="rightArrow"
           style={styles.icon}
           color={colorize('text')}
-          onClick={() =>
-            navigate('Conversation', {
-              contactIds: selectedContacts.map((contact) => contact.id),
-              name:
-                selectedContacts.length > 1
-                  ? getGroupName(selectedContacts)
-                  : selectedContacts?.[0]?.name,
-              avatar:
-                selectedContacts.length > 1
-                  ? null
-                  : selectedContacts?.[0]?.avatar,
-            })
-          }
+          onClick={startConversation}
         />
       </Header>
       <List

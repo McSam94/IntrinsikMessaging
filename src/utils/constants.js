@@ -1,4 +1,6 @@
+import React from 'react';
 import DocumentPicker from 'react-native-document-picker';
+import Toast from 'Components/toast';
 
 export const RESPONSE_STATUS = Object.freeze({
   SUCCESS: 200,
@@ -21,3 +23,9 @@ export const ALLOWED_FILE_TYPE = [
   DocumentPicker.types.xls,
   DocumentPicker.types.xlsx,
 ];
+
+export const TOAST_CONFIG = {
+  success: ({ text1 }) => <Toast type="success" text={text1} />,
+  error: ({ text1 }) => <Toast type="error" text={text1} />,
+  info: ({ text1 }) => <Toast type="info" text={text1} />,
+};

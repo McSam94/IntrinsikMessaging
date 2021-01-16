@@ -4,11 +4,38 @@ import { createRequestAction } from 'Utils/common';
 import AuthSrv from 'Services/auth';
 import { RESPONSE_STATUS } from 'Utils/constants';
 import { storeData } from 'Utils/local-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const authAction = Object.freeze({
+  INIT: createRequestAction('init'),
   LOGIN: createRequestAction('login'),
   LOGOUT: 'logout',
 });
+
+export const init = (dispatch) => {
+  return useCallback(async () => {
+    dispatch({
+      type: authAction.INIT.REQUEST,
+    });
+
+    try {
+      const result = await AsyncStorage.multiGet(['@token', '@user']);
+
+      const [[, token], [, user]] = result;
+      dispatch({
+        type: authAction.INIT.SUCCESS,
+        payload: {
+          token,
+          user: JSON.parse(user),
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: authAction.INIT.FAIL,
+      });
+    }
+  }, [dispatch]);
+};
 
 export const login = (dispatch) => {
   return useCallback(

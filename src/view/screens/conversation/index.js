@@ -83,6 +83,7 @@ const Conversation = () => {
     launchCamera({ mediaType: 'photo', quality: 1 }, ({ errorCode, uri }) => {
       if (errorCode === 'camera_unavailable') {
         Toast.show({
+          type: 'error',
           text1: translate('screens.conversation.camera_unavailable'),
         });
       } else {
@@ -99,6 +100,7 @@ const Conversation = () => {
       ({ errorMessage, didCancel, uri }) => {
         if (errorMessage) {
           Toast.show({
+            type: 'error',
             text2: errorMessage,
           });
         } else if (!didCancel) {
@@ -225,7 +227,7 @@ const MediaButton = ({ icon, label, onClick }) => {
       name={icon}
       label={label}
       color={Colors.primary}
-      style={styles.mediaIcon}
+      style={{ ...styles.mediaIcon, backgroundColor: colorize('background') }}
       labelStyle={{ color: colorize('text') }}
       width="50%"
       height="50%"
@@ -260,7 +262,6 @@ const styles = StyleSheet.create({
   mediaIcon: {
     width: 100,
     borderRadius: 8,
-    backgroundColor: Colors.white,
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 8,

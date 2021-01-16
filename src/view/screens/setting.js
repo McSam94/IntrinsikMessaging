@@ -19,16 +19,17 @@ const Setting = () => {
   const { updateTheme, updateLang, lang } = useContext(UiContext);
   const { logout } = useContext(AuthContext);
 
-  const updateThemeFn = useCallback(() => {
-    const theme = getData('@theme') ?? 'light';
+  const updateThemeFn = useCallback(async () => {
+    const theme = (await getData('@theme')) ?? 'light';
     const newThemeIndex =
       THEME.indexOf(theme) === THEME.length - 1 ? 0 : THEME.indexOf(theme) + 1;
 
+    console.log(newThemeIndex);
     updateTheme(THEME[newThemeIndex]);
   }, [updateTheme]);
 
-  const updateLangFn = useCallback(() => {
-    const language = getData('@lang') ?? 'en';
+  const updateLangFn = useCallback(async () => {
+    const language = (await getData('@lang')) ?? 'en';
     const newLangIndex =
       LANG.indexOf(language) === LANG.length - 1
         ? 0
