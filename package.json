@@ -52,8 +52,5 @@
 		"prettier": "^2.2.1",
 		"react-native-svg-transformer": "^0.14.3",
 		"react-test-renderer": "16.13.1"
-	},
-	"hooks": {
-		"pre-commit": "lint-staged"
 	}
 }
