@@ -13,111 +13,125 @@ const THEME = ['dark', 'light'];
 const LANG = ['en-US', 'zh'];
 
 const Setting = () => {
-  const { canGoBack, goBack } = useNavigation();
-  const { appTheme, colorize } = useThemeColor();
-  const { translate, languageName } = useTranslation();
-  const { updateTheme, updateLang, lang } = useContext(UiContext);
-  const { logout } = useContext(AuthContext);
+	const { canGoBack, goBack } = useNavigation();
+	const { appTheme, colorize } = useThemeColor();
+	const { translate, languageName } = useTranslation();
+	const { updateTheme, updateLang, lang } = useContext(UiContext);
+	const { logout } = useContext(AuthContext);
 
-  const updateThemeFn = useCallback(async () => {
-    const theme = (await getData('@theme')) ?? 'light';
-    const newThemeIndex =
-      THEME.indexOf(theme) === THEME.length - 1 ? 0 : THEME.indexOf(theme) + 1;
+	const updateThemeFn = useCallback(async () => {
+		const theme = (await getData('@theme')) ?? 'light';
+		const newThemeIndex =
+			THEME.indexOf(theme) === THEME.length - 1
+				? 0
+				: THEME.indexOf(theme) + 1;
 
-    updateTheme(THEME[newThemeIndex]);
-  }, [updateTheme]);
+		updateTheme(THEME[newThemeIndex]);
+	}, [updateTheme]);
 
-  const updateLangFn = useCallback(async () => {
-    const language = (await getData('@lang')) ?? 'en';
-    const newLangIndex =
-      LANG.indexOf(language) === LANG.length - 1
-        ? 0
-        : LANG.indexOf(language) + 1;
+	const updateLangFn = useCallback(async () => {
+		const language = (await getData('@lang')) ?? 'en';
+		const newLangIndex =
+			LANG.indexOf(language) === LANG.length - 1
+				? 0
+				: LANG.indexOf(language) + 1;
 
-    updateLang(LANG[newLangIndex]);
-  }, [updateLang]);
+		updateLang(LANG[newLangIndex]);
+	}, [updateLang]);
 
-  const navigateBack = useCallback(() => {
-    if (canGoBack) {
-      goBack();
-    }
-  }, [canGoBack, goBack]);
+	const navigateBack = useCallback(() => {
+		if (canGoBack) {
+			goBack();
+		}
+	}, [canGoBack, goBack]);
 
-  const getIcon = useMemo(() => {
-    switch (appTheme) {
-      case 'system':
-        return 'smartphone';
-      case 'dark':
-        return 'moon';
-      case 'light':
-        return 'sun';
-      default:
-        return 'system';
-    }
-  }, [appTheme]);
+	const getIcon = useMemo(() => {
+		switch (appTheme) {
+			case 'system':
+				return 'smartphone';
+			case 'dark':
+				return 'moon';
+			case 'light':
+				return 'sun';
+			default:
+				return 'system';
+		}
+	}, [appTheme]);
 
-  useEffect(() => {
-    storeData('@theme', appTheme);
-  }, [appTheme]);
+	useEffect(() => {
+		storeData('@theme', appTheme);
+	}, [appTheme]);
 
-  useEffect(() => {
-    storeData('@lang', lang);
-  }, [lang]);
+	useEffect(() => {
+		storeData('@lang', lang);
+	}, [lang]);
 
-  return (
-    <Layout>
-      <Header
-        label={translate('screens.setting.title')}
-        navigate={navigateBack}
-      />
-      <ListItem
-        style={{
-          ...styles.item,
-          borderBottomColor: colorize('border'),
-        }}
-        icon={
-          <Icon name={getIcon} color={colorize('text')} style={styles.icon} />
-        }
-        title={translate('screens.setting.dark')}
-        description={appTheme}
-        onClick={updateThemeFn}
-      />
-      <ListItem
-        style={{
-          ...styles.item,
-          borderBottomColor: colorize('border'),
-        }}
-        icon={
-          <Icon name="earth" color={colorize('text')} style={styles.icon} />
-        }
-        title={translate('screens.setting.lang')}
-        description={languageName}
-        onClick={updateLangFn}
-      />
-      <ListItem
-        style={{
-          ...styles.item,
-          borderBottomColor: colorize('border'),
-        }}
-        icon={
-          <Icon name="logout" color={colorize('text')} style={styles.icon} />
-        }
-        title={translate('screens.setting.logout')}
-        onClick={logout}
-      />
-    </Layout>
-  );
+	return (
+		<Layout>
+			<Header
+				label={translate('screens.setting.title')}
+				navigate={navigateBack}
+			/>
+			<ListItem
+				style={{
+					...styles.item,
+					borderBottomColor: colorize('border'),
+				}}
+				icon={
+					<Icon
+						name={getIcon}
+						color={colorize('text')}
+						style={styles.icon}
+					/>
+				}
+				title={translate('screens.setting.dark')}
+				description={appTheme}
+				onClick={updateThemeFn}
+			/>
+			<ListItem
+				style={{
+					...styles.item,
+					borderBottomColor: colorize('border'),
+				}}
+				icon={
+					<Icon
+						name="earth"
+						color={colorize('text')}
+						style={styles.icon}
+					/>
+				}
+				title={translate('screens.setting.lang')}
+				description={languageName}
+				onClick={updateLangFn}
+			/>
+			<ListItem
+				style={{
+					...styles.item,
+					borderBottomColor: colorize('border'),
+				}}
+				icon={
+					<Icon
+						name="logout"
+						color={colorize('text')}
+						style={styles.icon}
+					/>
+				}
+				title={translate('screens.setting.logout')}
+				onClick={logout}
+			/>
+		</Layout>
+	);
 };
 
 const styles = StyleSheet.create({
-  icon: {
-    height: 40,
-    width: 40,
-  },
-  item: {
-    paddingHorizontal: 24,
-    borderBottomWidth: 1,
-  },
+	icon: {
+		height: 40,
+		width: 40,
+	},
+	item: {
+		paddingHorizontal: 24,
+		borderBottomWidth: 1,
+	},
 });
 
 export default Setting;

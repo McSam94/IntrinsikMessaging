@@ -5,30 +5,30 @@ import Avatar from '../avatar';
 afterEach(cleanup);
 
 test('Render correctly', async (done) => {
-  const { getByTestId } = render(
-    <Avatar uri="https://robohash.org/est.png?size=300x300" />,
-  );
+	const { getByTestId } = render(
+		<Avatar uri="https://robohash.org/est.png?size=300x300" />,
+	);
 
-  const avatar = getByTestId('avatar');
-  expect(avatar).toBeTruthy();
+	const avatar = getByTestId('avatar');
+	expect(avatar).toBeTruthy();
 
-  done();
+	done();
 });
 
 test('Render selected correctly', async (done) => {
-  const { getByTestId } = render(<Avatar isSelected />);
+	const { getByTestId } = render(<Avatar isSelected />);
 
-  const selectedAvatar = getByTestId('avatar-selected');
-  expect(selectedAvatar).toBeTruthy();
+	const selectedAvatar = getByTestId('avatar-selected');
+	expect(selectedAvatar).toBeTruthy();
 
-  done();
+	done();
 });
 
 test('Render default correctly', async (done) => {
-  const { getByTestId } = render(<Avatar />);
+	const { getByTestId } = render(<Avatar />);
 
-  const defaultAvatar = getByTestId('avatar-default');
-  expect(defaultAvatar).toBeTruthy();
+	const defaultAvatar = getByTestId('avatar-default');
+	expect(defaultAvatar).toBeTruthy();
 
-  done();
+	done();
 });

@@ -12,69 +12,69 @@ import Icon from 'Components/icon';
 import Avatar from 'Components/avatar';
 
 const Home = () => {
-  const { colorize } = useThemeColor();
-  const { navigate } = useNavigation();
-  const { translate } = useTranslation();
-  const { chatList, getChatList, chatErrorMsg, isGettingList } = useContext(
-    ChatContext,
-  );
+	const { colorize } = useThemeColor();
+	const { navigate } = useNavigation();
+	const { translate } = useTranslation();
+	const { chatList, getChatList, chatErrorMsg, isGettingList } = useContext(
+		ChatContext,
+	);
 
-  const renderListItem = ({ item }) => {
-    return (
-      <ListItem
-        icon={<Avatar uri={item?.avatar} />}
-        title={item?.name}
-        description={item?.lastMessage}
-        onClick={() =>
-          navigate('Conversation', {
-            conversationId: item.id,
-            avatar: item?.avatar,
-            name: item?.name,
-          })
-        }
-      />
-    );
-  };
+	const renderListItem = ({ item }) => {
+		return (
+			<ListItem
+				icon={<Avatar uri={item?.avatar} />}
+				title={item?.name}
+				description={item?.lastMessage}
+				onClick={() =>
+					navigate('Conversation', {
+						conversationId: item.id,
+						avatar: item?.avatar,
+						name: item?.name,
+					})
+				}
+			/>
+		);
+	};
 
-  useEffect(() => {
-    if (!chatList.length) {
-      getChatList();
-    }
-  }, [chatList, getChatList]);
+	useEffect(() => {
+		if (!chatList.length) {
+			getChatList();
+		}
+	}, [chatList, getChatList]);
 
-  return (
-    <Layout>
-      <Header label={translate('screens.home.title')}>
-        <Icon
-          name="setting"
-          color={colorize('text')}
-          style={styles.icon}
-          onClick={() => navigate('Setting')}
-        />
-      </Header>
-      <List
-        style={styles.list}
-        data={chatList}
-        isLoading={isGettingList}
-        renderItem={renderListItem}
-        onMoreData={getChatList}
-        error={chatErrorMsg}
-        emptyMsg={translate('screens.home.empty')}
-      />
-      <Floating icon="pen" onClick={() => navigate('Contact')} />
-    </Layout>
-  );
+	return (
+		<Layout>
+			<Header label={translate('screens.home.title')}>
+				<Icon
+					name="setting"
+					color={colorize('text')}
+					style={styles.icon}
+					onClick={() => navigate('Setting')}
+				/>
+			</Header>
+			<List
+				style={styles.list}
+				data={chatList}
+				isLoading={isGettingList}
+				renderItem={renderListItem}
+				onMoreData={getChatList}
+				error={chatErrorMsg}
+				emptyMsg={translate('screens.home.empty')}
+			/>
+			<Floating icon="pen" onClick={() => navigate('Contact')} />
+		</Layout>
+	);
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  list: {},
-  icon: {
-    height: 30,
-    width: 30,
-  },
+	container: {
+		flex: 1,
+	},
+	list: {},
+	icon: {
+		height: 30,
+		width: 30,
+	},
 });
 
 export default Home;

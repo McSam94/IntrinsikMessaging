@@ -1,49 +1,49 @@
 {
-  "screens": {
-    "login": {
-      "username": "Username",
-      "password": "Password",
-      "signin": "Sign In",
-      "signup": "Sign Up",
-      "validation": {
-        "username": "Username cannot be empty",
-        "password": "Password cannot be empty"
-      }
-    },
-    "home": {
-      "title": "Chat",
-      "empty": "No chat found. Get started by messaging a friend."
-    },
-    "contact": {
-      "title": "Contact",
-      "empty": "No contact found. Invite your friend now",
-      "validate": "Please select at least one contact"
-    },
-    "conversation": {
-      "read": "read",
-      "unread": "unread",
-      "empty": "No conversation found. Start chatting now.",
-      "type": "Type a message",
-      "image": "Image",
-      "file": "File",
-      "camera": "Camera",
-      "preview": "Preview",
-      "camera_unavailable": "Camera not available on device",
-      "permission": "Permission disabled"
-    },
-    "setting": {
-      "title": "Setting",
-      "dark": "Dark Mode",
-      "lang": "Language",
-      "logout": "Logout"
-    }
-  },
-  "components": {
-    "list": {
-      "loading": "Loading..."
-    }
-  },
-  "general": {
-    "error": "Opps, Something went wrong :("
-  }
+	"screens": {
+		"login": {
+			"username": "Username",
+			"password": "Password",
+			"signin": "Sign In",
+			"signup": "Sign Up",
+			"validation": {
+				"username": "Username cannot be empty",
+				"password": "Password cannot be empty"
+			}
+		},
+		"home": {
+			"title": "Chat",
+			"empty": "No chat found. Get started by messaging a friend."
+		},
+		"contact": {
+			"title": "Contact",
+			"empty": "No contact found. Invite your friend now",
+			"validate": "Please select at least one contact"
+		},
+		"conversation": {
+			"read": "read",
+			"unread": "unread",
+			"empty": "No conversation found. Start chatting now.",
+			"type": "Type a message",
+			"image": "Image",
+			"file": "File",
+			"camera": "Camera",
+			"preview": "Preview",
+			"camera_unavailable": "Camera not available on device",
+			"permission": "Permission disabled"
+		},
+		"setting": {
+			"title": "Setting",
+			"dark": "Dark Mode",
+			"lang": "Language",
+			"logout": "Logout"
+		}
+	},
+	"components": {
+		"list": {
+			"loading": "Loading..."
+		}
+	},
+	"general": {
+		"error": "Opps, Something went wrong :("
+	}
 }

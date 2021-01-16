@@ -6,47 +6,47 @@ import { FontSize } from 'Styles/typography';
 import { Colors } from 'Styles/colors';
 
 const Loader = ({ style, size, message, color }) => {
-  const { colorize } = useThemeColor();
+	const { colorize } = useThemeColor();
 
-  return (
-    <View style={[styles.container, style]}>
-      <ActivityIndicator
-        size={size ?? 'large'}
-        color={color ?? Colors.primary}
-      />
-      {message && (
-        <Text
-          style={[
-            styles.text,
-            {
-              color: colorize('textWashOut'),
-            },
-          ]}>
-          {message}
-        </Text>
-      )}
-    </View>
-  );
+	return (
+		<View style={[styles.container, style]}>
+			<ActivityIndicator
+				size={size ?? 'large'}
+				color={color ?? Colors.primary}
+			/>
+			{message && (
+				<Text
+					style={[
+						styles.text,
+						{
+							color: colorize('textWashOut'),
+						},
+					]}>
+					{message}
+				</Text>
+			)}
+		</View>
+	);
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: FontSize.L,
-    marginTop: 26,
-  },
+	container: {
+		flex: 1,
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	text: {
+		fontSize: FontSize.L,
+		marginTop: 26,
+	},
 });
 
 Loader.propTypes = {
-  style: PropTypes.object,
-  size: PropTypes.oneOf(['large', 'small']),
-  message: PropTypes.string,
-  color: PropTypes.string,
+	style: PropTypes.object,
+	size: PropTypes.oneOf(['large', 'small']),
+	message: PropTypes.string,
+	color: PropTypes.string,
 };
 
 export default memo(Loader);

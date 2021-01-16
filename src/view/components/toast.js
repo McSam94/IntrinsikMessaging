@@ -7,57 +7,57 @@ import { FontSize } from 'Styles/typography';
 import Icon from 'Components/icon';
 
 const Toast = ({ type, text }) => {
-  const { colorize } = useThemeColor();
-  const getColor = useMemo(() => {
-    switch (type) {
-      case 'info':
-        return Colors.info;
-      case 'error':
-        return Colors.error;
-      case 'success':
-        return Colors.secondary;
-      default:
-        return Colors.primary;
-    }
-  }, [type]);
+	const { colorize } = useThemeColor();
+	const getColor = useMemo(() => {
+		switch (type) {
+			case 'info':
+				return Colors.info;
+			case 'error':
+				return Colors.error;
+			case 'success':
+				return Colors.secondary;
+			default:
+				return Colors.primary;
+		}
+	}, [type]);
 
-  return (
-    <View
-      style={[
-        styles.toastContainer,
-        {
-          backgroundColor: getColor,
-        },
-      ]}>
-      <Icon name={type} style={styles.icon} color={Colors.white} />
-      <Text style={styles.toastText}>{text}</Text>
-    </View>
-  );
+	return (
+		<View
+			style={[
+				styles.toastContainer,
+				{
+					backgroundColor: getColor,
+				},
+			]}>
+			<Icon name={type} style={styles.icon} color={Colors.white} />
+			<Text style={styles.toastText}>{text}</Text>
+		</View>
+	);
 };
 
 const styles = StyleSheet.create({
-  toastContainer: {
-    width: '80%',
-    height: 60,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    ...Shadow,
-  },
-  icon: {
-    height: 25,
-    width: 25,
-  },
-  toastText: {
-    fontSize: FontSize.XL,
-    marginStart: 12,
-    color: Colors.white,
-  },
+	toastContainer: {
+		width: '80%',
+		height: 60,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+		...Shadow,
+	},
+	icon: {
+		height: 25,
+		width: 25,
+	},
+	toastText: {
+		fontSize: FontSize.XL,
+		marginStart: 12,
+		color: Colors.white,
+	},
 });
 
 Toast.propTypes = {
-  type: PropTypes.oneOf(['info', 'success', 'error']),
-  text: PropTypes.string,
+	type: PropTypes.oneOf(['info', 'success', 'error']),
+	text: PropTypes.string,
 };
 
 export default memo(Toast);
