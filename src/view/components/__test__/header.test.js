@@ -8,7 +8,7 @@ import Header from '../header';
 
 afterEach(cleanup);
 
-test('Render correctly', async (done) => {
+test('Render correctly', async () => {
 	const mockFn = jest.fn();
 	const { getByTestId } = render(
 		<UpdateThemeProvider>
@@ -20,7 +20,7 @@ test('Render correctly', async (done) => {
 	const darkmodeButton = getByTestId('darkmode-button');
 
 	const container = getByTestId('header-container');
-	const navigationIcon = getByTestId('header-navigate-icon');
+	const navigationIcon = getByTestId('header-navigate-icon-leftArrow');
 	const navigation = getByTestId('header-navigate');
 	const title = getByTestId('header-title');
 	const testChild = getByTestId('test');
@@ -38,6 +38,4 @@ test('Render correctly', async (done) => {
 	fireEvent.press(darkmodeButton);
 	expect(navigationIcon).toHaveProp('fill', Colors.white);
 	expect(title).toHaveStyle({ color: Colors.white });
-
-	done();
 });

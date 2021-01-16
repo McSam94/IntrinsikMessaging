@@ -5,7 +5,7 @@ export const Colors = Object.freeze({
 	black: '#000000',
 	washout: '#8d99ae',
 	white: '#ffffff',
-	gray: '#e0e0e0',
+	gray: '#d9d9d9',
 	darkGray: '#595959',
 	light: '#ebebeb',
 	error: '#ff4d4d',

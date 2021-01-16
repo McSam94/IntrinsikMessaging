@@ -5,11 +5,11 @@ import { useThemeColor } from 'Stores/ui';
 import { FontSize } from 'Styles/typography';
 import { Colors } from 'Styles/colors';
 
-const Loader = ({ style, size, message, color }) => {
+const Loader = ({ testID, style, size, message, color }) => {
 	const { colorize } = useThemeColor();
 
 	return (
-		<View style={[styles.container, style]}>
+		<View testID={testID ?? 'loader'} style={[styles.container, style]}>
 			<ActivityIndicator
 				size={size ?? 'large'}
 				color={color ?? Colors.primary}
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
 });
 
 Loader.propTypes = {
+	testID: PropTypes.string,
 	style: PropTypes.object,
 	size: PropTypes.oneOf(['large', 'small']),
 	message: PropTypes.string,

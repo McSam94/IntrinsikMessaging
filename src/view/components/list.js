@@ -16,6 +16,7 @@ import { FontSize } from 'Styles/typography';
 import CONSTANT from 'Styles/constant';
 
 const List = ({
+	testID,
 	style,
 	data,
 	isLoading,
@@ -53,14 +54,20 @@ const List = ({
 		return null;
 	}, [shouldShowSeperator, colorize]);
 
-	if (isLoading && !data.length) {
-		return <Loader message={translate('components.list.loading')} />;
+	if (isLoading) {
+		return (
+			<Loader
+				testID="list-loading"
+				message={translate('components.list.loading')}
+			/>
+		);
 	}
 
 	return (
 		<>
 			{data.length ? (
 				<FlatList
+					testID={testID ?? 'list'}
 					style={[styles.list, style]}
 					data={data}
 					renderItem={renderItem}
@@ -72,8 +79,11 @@ const List = ({
 					{...props}
 				/>
 			) : (
-				<Animated.View style={styles.placeholder}>
+				<Animated.View
+					style={styles.placeholder}
+					testID={testID ? `${testID}-status` : 'list-status'}>
 					<Icon
+						testID={testID ? `${testID}-image` : 'list-image'}
 						name={error ? 'errorStatus' : 'emptyStatus'}
 						style={{
 							...styles.placeholderImg,
@@ -81,13 +91,16 @@ const List = ({
 						}}
 					/>
 					<Text
+						testID={testID ? `${testID}-message` : 'list-message'}
 						style={[
 							styles.placeholderText,
 							{
 								color: colorize('textWashOut'),
 							},
 						]}>
-						{error ? translate('general.error') : emptyMsg}
+						{error
+							? /*translate('general.error')*/ error
+							: emptyMsg}
 					</Text>
 				</Animated.View>
 			)}
@@ -124,6 +137,7 @@ const styles = StyleSheet.create({
 });
 
 List.propTypes = {
+	testID: PropTypes.string,
 	style: PropTypes.object,
 	data: PropTypes.array,
 	isLoading: PropTypes.bool,

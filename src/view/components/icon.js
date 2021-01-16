@@ -24,9 +24,10 @@ const Icon = ({
 			testID={testID ?? 'icon'}
 			style={[styles.container, style]}
 			disabled={typeof onClick !== 'function'}
+			name={name}
 			onPress={onClick}>
 			<DynamicIcon
-				testID={testID ? `${testID}-icon` : 'icon-svg'}
+				testID={testID ? `${testID}-icon-${name}` : `icon-${name}`}
 				fill={color}
 				height={height ?? '100%'}
 				width={width ?? '100%'}

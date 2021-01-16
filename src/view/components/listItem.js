@@ -5,6 +5,7 @@ import { useThemeColor } from 'Stores/ui';
 import { FontSize } from 'Styles/typography';
 
 const ListItem = ({
+	testID,
 	style,
 	titleStyle,
 	descriptionStyle,
@@ -16,9 +17,14 @@ const ListItem = ({
 	const { colorize } = useThemeColor();
 
 	return (
-		<TouchableOpacity style={[styles.listItem, style]} onPress={onClick}>
+		<TouchableOpacity
+			testID={testID ?? 'listitem'}
+			style={[styles.listItem, style]}
+			onPress={onClick}>
 			{icon}
-			<View style={styles.info}>
+			<View
+				testID={testID ? `${testID}-title` : 'listitem-title'}
+				style={styles.info}>
 				{title && (
 					<Text
 						style={[
@@ -33,6 +39,11 @@ const ListItem = ({
 				)}
 				{description && (
 					<Text
+						testID={
+							testID
+								? `${testID}-description`
+								: 'listitem-description'
+						}
 						style={[
 							styles.description,
 							{
@@ -83,6 +94,7 @@ const styles = StyleSheet.create({
 });
 
 ListItem.propTypes = {
+	testID: PropTypes.string,
 	style: PropTypes.object,
 	titleStyle: PropTypes.object,
 	descriptionStyle: PropTypes.object,

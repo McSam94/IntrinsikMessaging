@@ -1,13 +1,11 @@
 import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, View } from 'react-native';
-import { useThemeColor } from 'Stores/ui';
 import { Colors, Shadow } from 'Styles/colors';
 import { FontSize } from 'Styles/typography';
 import Icon from 'Components/icon';
 
 const Toast = ({ type, text }) => {
-	const { colorize } = useThemeColor();
 	const getColor = useMemo(() => {
 		switch (type) {
 			case 'info':

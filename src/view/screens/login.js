@@ -37,7 +37,7 @@ const Login = () => {
 				<View style={styles.logoContainer}>
 					<Icon
 						name="chat"
-						color={Colors.washout}
+						color={Colors.primary}
 						style={styles.logo}
 					/>
 					<Text

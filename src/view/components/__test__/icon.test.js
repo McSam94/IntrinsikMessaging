@@ -9,12 +9,12 @@ afterEach(cleanup);
 
 test('Render correctly', (done) => {
 	const mockFn = jest.fn();
-	const { getByTestId, debug } = render(
+	const { getByTestId } = render(
 		<Icon name="tick" color={Colors.white} onClick={mockFn} />,
 	);
 
 	const iconContainer = getByTestId('icon');
-	const svgIcon = getByTestId('icon-svg');
+	const svgIcon = getByTestId('icon-tick');
 	expect(iconContainer).toBeTruthy();
 	expect(svgIcon).toHaveProp('fill', Colors.white);
 
@@ -39,7 +39,7 @@ test('Render with label correctly', (done) => {
 	const darkmodeButton = getByTestId('darkmode-button');
 
 	const iconContainer = getByTestId('icon');
-	const svgIcon = getByTestId('icon-svg');
+	const svgIcon = getByTestId('icon-tick');
 	const iconLabel = getByTestId('icon-label');
 	expect(iconContainer).toBeTruthy();
 	expect(iconLabel).toHaveStyle({ color: Colors.black });

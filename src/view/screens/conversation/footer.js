@@ -22,7 +22,7 @@ const Footer = ({
 	const [message, setMessage] = useState('');
 
 	const sendMessageFn = useCallback(() => {
-		if (message === '') {
+		if (message === '' && !image && !file) {
 			return;
 		}
 
@@ -30,7 +30,7 @@ const Footer = ({
 			onSendMessage(message);
 		}
 		setMessage('');
-	}, [onSendMessage, message]);
+	}, [onSendMessage, message, image, file]);
 
 	return (
 		<View

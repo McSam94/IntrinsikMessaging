@@ -92,6 +92,7 @@ const Conversation = () => {
 					});
 				} else {
 					setFilePreview(null);
+					console.log(uri);
 					setImagePreview(uri);
 				}
 			},
@@ -181,7 +182,7 @@ const Conversation = () => {
 			<View style={styles.conversation}>
 				<List
 					data={conversationList}
-					isLoading={isGettingList}
+					isLoading={isGettingList && conversationPage === 1}
 					renderItem={renderConversation}
 					onMoreData={loadMoreData}
 					error={conversationErrorMsg}

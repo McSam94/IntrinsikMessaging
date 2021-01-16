@@ -15,9 +15,13 @@ const Home = () => {
 	const { colorize } = useThemeColor();
 	const { navigate } = useNavigation();
 	const { translate } = useTranslation();
-	const { chatList, getChatList, chatErrorMsg, isGettingList } = useContext(
-		ChatContext,
-	);
+	const {
+		chatList,
+		chatPage,
+		getChatList,
+		chatErrorMsg,
+		isGettingList,
+	} = useContext(ChatContext);
 
 	const renderListItem = ({ item }) => {
 		return (
@@ -55,7 +59,7 @@ const Home = () => {
 			<List
 				style={styles.list}
 				data={chatList}
-				isLoading={isGettingList}
+				isLoading={isGettingList && chatPage === 1}
 				renderItem={renderListItem}
 				onMoreData={getChatList}
 				error={chatErrorMsg}

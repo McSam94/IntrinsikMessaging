@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, render, fireEvent, act } from '@testing-library/react-native';
+import { cleanup, render, fireEvent } from '@testing-library/react-native';
 import '@testing-library/jest-native/extend-expect';
 import { UpdateThemeProvider } from 'Test/mock-fn';
 import { Colors } from 'Styles/colors';
