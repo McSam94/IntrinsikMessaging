@@ -7,11 +7,13 @@ import {
   Text,
   useWindowDimensions,
   View,
+  Animated,
 } from 'react-native';
 import { useThemeColor, useTranslation } from 'Stores/ui';
 import Icon from 'Components/icon';
 import Loader from 'Components/loader';
 import { FontSize } from 'Styles/typography';
+import CONSTANT from 'Styles/constant';
 
 const List = ({
   style,
@@ -70,7 +72,7 @@ const List = ({
           {...props}
         />
       ) : (
-        <View style={styles.placeholder}>
+        <Animated.View style={styles.placeholder}>
           <Icon
             name={error ? 'errorStatus' : 'emptyStatus'}
             style={{
@@ -87,7 +89,7 @@ const List = ({
             ]}>
             {error ? translate('general.error') : emptyMsg}
           </Text>
-        </View>
+        </Animated.View>
       )}
     </>
   );
@@ -107,10 +109,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 25,
-    transform: [{ translateY: '-100%' }],
+    transform: [{ translateY: (CONSTANT.LIST.PLACEHOLDER_HEIGHT / 2) * -1 }],
   },
   placeholderImg: {
-    height: 250,
+    height: CONSTANT.LIST.PLACEHOLDER_HEIGHT,
   },
   placeholderText: {
     fontSize: FontSize.XXL,

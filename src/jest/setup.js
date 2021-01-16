@@ -3,15 +3,32 @@ import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/asy
 
 jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
 
-// jest.mock('react-native-safe-area-context', () => {
-//   return {
-//     useSafeArea: () => {
-//       return {
-//         bottom: 0,
-//         top: 0,
-//         left: 0,
-//         right: 0,
-//       };
-//     },
-//   };
-// });
+function setupTimeTravelForRNAnimated() {
+  const MockDate = require('mockdate');
+  const frameTime = 10;
+  global.withAnimatedTimeTravelEnabled = (func) => {
+    MockDate.set(0);
+    jest.useFakeTimers();
+    func();
+    MockDate.reset();
+    jest.useRealTimers();
+  };
+  global.requestAnimationFrame = (callback) => {
+    setTimeout(callback, frameTime);
+  };
+  global.timeTravel = (time = frameTime) => {
+    const tickTravel = () => {
+      const now = Date.now();
+      MockDate.set(new Date(now + frameTime));
+      // Run the timers forward
+      jest.advanceTimersByTime(frameTime);
+    };
+    // Step through each of the frames
+    const frames = time / frameTime;
+    for (let i = 0; i < frames; i++) {
+      tickTravel();
+    }
+  };
+}
+
+setupTimeTravelForRNAnimated();

@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { UiContext } from 'Stores';
+import { Provider as UiProvider } from 'Stores/ui';
 
 export function TestSafeAreaProvider({ children }) {
   return (
@@ -10,5 +13,25 @@ export function TestSafeAreaProvider({ children }) {
       }}>
       {children}
     </SafeAreaProvider>
+  );
+}
+
+export function UpdateThemeProvider({ children }) {
+  return (
+    <UiProvider>
+      {children}
+      <UpdateThemeConsumer />
+    </UiProvider>
+  );
+}
+
+function UpdateThemeConsumer() {
+  const { updateTheme } = useContext(UiContext);
+
+  return (
+    <TouchableOpacity
+      testID="darkmode-button"
+      onPress={() => updateTheme('dark')}
+    />
   );
 }

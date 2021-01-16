@@ -24,7 +24,6 @@ const Setting = () => {
     const newThemeIndex =
       THEME.indexOf(theme) === THEME.length - 1 ? 0 : THEME.indexOf(theme) + 1;
 
-    console.log(newThemeIndex);
     updateTheme(THEME[newThemeIndex]);
   }, [updateTheme]);
 
@@ -35,7 +34,6 @@ const Setting = () => {
         ? 0
         : LANG.indexOf(language) + 1;
 
-    console.log(newLangIndex);
     updateLang(LANG[newLangIndex]);
   }, [updateLang]);
 

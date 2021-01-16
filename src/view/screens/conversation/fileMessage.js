@@ -12,15 +12,7 @@ const FileMessage = ({ style, name, uri }) => {
   return (
     <View style={[styles.fileContainer, style]}>
       <Icon name="file" color={Colors.darkGray} />
-      <Text
-        style={[
-          styles.fileName,
-          {
-            color: colorize('text'),
-          },
-        ]}>
-        {name}
-      </Text>
+      <Text style={styles.fileName}>{name}</Text>
     </View>
   );
 };
@@ -36,6 +28,7 @@ const styles = StyleSheet.create({
   },
   fileName: {
     fontSize: FontSize.XL,
+    color: Colors.black,
     marginLeft: 12,
   },
   download: {

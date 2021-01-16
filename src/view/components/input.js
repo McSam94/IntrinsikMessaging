@@ -11,12 +11,12 @@ import PropTypes from 'prop-types';
 import { useThemeColor } from 'Stores/ui';
 import { Colors } from 'Styles/colors';
 import { Controller } from 'react-hook-form';
-
-const ANIMATION_DURATION = 300;
+import CONSTANT from 'Styles/constant';
 
 const Input = forwardRef(
   (
     {
+      testID,
       style,
       inputStyle,
       label,
@@ -37,7 +37,7 @@ const Input = forwardRef(
     useEffect(() => {
       Animated.timing(shouldTop, {
         toValue: !!inputValue || isFocused ? 1 : 0,
-        duration: ANIMATION_DURATION,
+        duration: CONSTANT.INPUT.ANIMATION_DURATION,
         useNativeDriver: false,
       }).start();
     }, [inputValue, isFocused, shouldTop]);
@@ -48,7 +48,10 @@ const Input = forwardRef(
 
     const animatedLabelTop = shouldTop.interpolate({
       inputRange: [0, 1],
-      outputRange: [10, -8],
+      outputRange: [
+        CONSTANT.INPUT.HEIGHT / 3,
+        (CONSTANT.INPUT.HEIGHT / 6) * -1,
+      ],
       extrapolate: 'clamp',
     });
 
@@ -61,7 +64,9 @@ const Input = forwardRef(
     const onChange = useCallback(
       (text) => {
         setInputValue(text);
-        if (onChangeText) onChangeText(text);
+        if (onChangeText) {
+          onChangeText(text);
+        }
       },
       [onChangeText],
     );
@@ -73,12 +78,16 @@ const Input = forwardRef(
     return (
       <View
         ref={ref}
+        testID={testID ?? 'input'}
         style={[
           styles.container,
           underline
             ? {
-                borderBottomWidth: 1,
-                borderBottomColor: colorize('border'),
+                ...styles.underlineContainer,
+                borderBottomColor:
+                  isFocused || !!inputValue
+                    ? Colors.primary
+                    : colorize('border'),
               }
             : {},
           error ? styles.errorContainer : {},
@@ -86,6 +95,7 @@ const Input = forwardRef(
         ]}>
         {shouldAnimate && (
           <Animated.Text
+            testID={testID ? `${testID}-label` : 'input-label'}
             style={[
               styles.label,
               // eslint-disable-next-line react-native/no-inline-styles
@@ -112,6 +122,7 @@ const Input = forwardRef(
           </Animated.Text>
         )}
         <TextInput
+          testID={testID ? `${testID}-field` : 'input-field'}
           style={[
             styles.input,
             {
@@ -125,13 +136,20 @@ const Input = forwardRef(
           onBlur={() => onFocus(false)}
           {...props}
         />
-        {error && <Text style={styles.error}>{error}</Text>}
+        {error && (
+          <Text
+            testID={testID ? `${testID}-error` : 'input-error'}
+            style={styles.error}>
+            {error}
+          </Text>
+        )}
       </View>
     );
   },
 );
 
 Input.propTypes = {
+  testID: PropTypes.string,
   style: PropTypes.object,
   inputStyle: PropTypes.object,
   label: PropTypes.string,
@@ -172,13 +190,17 @@ ControlledInput.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    height: 42,
+    height: CONSTANT.INPUT.HEIGHT,
+  },
+  underlineContainer: {
+    borderBottomWidth: 1,
   },
   errorContainer: {
     borderBottomColor: Colors.error,
   },
   label: {
     fontSize: 12,
+    position: 'absolute',
   },
   input: {},
   error: {

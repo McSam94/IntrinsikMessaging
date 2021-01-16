@@ -6,11 +6,19 @@ import Icon from 'Components/icon';
 import Avatar from 'Components/avatar';
 import { useThemeColor } from 'Stores/ui';
 
-const Header = ({ style, children, avatar, label, navigate, ...props }) => {
+const Header = ({
+  testID,
+  style,
+  children,
+  avatar,
+  label,
+  navigate,
+  ...props
+}) => {
   const { colorize } = useThemeColor();
 
   return (
-    <View style={styles.container}>
+    <View testID={testID ?? 'header-container'} style={styles.container}>
       <View style={styles.titleContainer}>
         {navigate && (
           <Icon
@@ -44,8 +52,12 @@ const Header = ({ style, children, avatar, label, navigate, ...props }) => {
 };
 
 Header.propTypes = {
+  testID: PropTypes.string,
   style: PropTypes.object,
   children: PropTypes.node,
+  avatar: PropTypes.node,
+  label: PropTypes.string,
+  navigate: PropTypes.func,
 };
 
 const styles = StyleSheet.create({

@@ -3,4 +3,7 @@ module.exports = {
   jsxBracketSameLine: true,
   singleQuote: true,
   trailingComma: 'all',
+  semi: true,
+  tabWidth: 4,
+  useTabs: true,
 };

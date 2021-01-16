@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useThemeColor } from 'Stores/ui';
 import * as SvgCollections from 'Assets/icons';
 
@@ -20,54 +20,32 @@ const Icon = ({
   const DynamicIcon = SvgCollections[name];
 
   return (
-    <>
-      {onClick ? (
-        <TouchableOpacity
-          testID={testID ?? 'icon'}
-          style={[styles.container, style]}
-          onPress={onClick}>
-          <DynamicIcon
-            fill={color}
-            height={height ?? '100%'}
-            width={width ?? '100%'}
-            {...props}
-          />
-          {label && (
-            <Text
-              style={[
-                styles.label,
-                {
-                  color: colorize('text'),
-                },
-                labelStyle,
-              ]}>
-              {label}
-            </Text>
-          )}
-        </TouchableOpacity>
-      ) : (
-        <View style={[styles.container, style]}>
-          <DynamicIcon
-            fill={color}
-            height={height ?? '100%'}
-            width={width ?? '100%'}
-            {...props}
-          />
-          {label && (
-            <Text
-              style={[
-                styles.label,
-                {
-                  color: colorize('text'),
-                },
-                labelStyle,
-              ]}>
-              {label}
-            </Text>
-          )}
-        </View>
+    <TouchableOpacity
+      testID={testID ?? 'icon'}
+      style={[styles.container, style]}
+      disabled={typeof onClick !== 'function'}
+      onPress={onClick}>
+      <DynamicIcon
+        testID={testID ? `${testID}-icon` : 'icon-svg'}
+        fill={color}
+        height={height ?? '100%'}
+        width={width ?? '100%'}
+        {...props}
+      />
+      {label && (
+        <Text
+          testID={testID ? `${testID}-label` : 'icon-label'}
+          style={[
+            styles.label,
+            {
+              color: colorize('text'),
+            },
+            labelStyle,
+          ]}>
+          {label}
+        </Text>
       )}
-    </>
+    </TouchableOpacity>
   );
 };
 

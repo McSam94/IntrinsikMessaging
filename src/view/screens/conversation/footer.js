@@ -1,8 +1,8 @@
 import React, { memo, useCallback, useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import { useThemeColor, useTranslation } from 'Stores/ui';
+import { useInsets } from 'Utils/hooks';
 import Icon from 'Components/icon';
 import Input from 'Components/input';
 import { FontSize } from 'Styles/typography';
@@ -18,7 +18,7 @@ const Footer = ({
 }) => {
   const { colorize } = useThemeColor();
   const { translate } = useTranslation();
-  const { bottom } = useSafeAreaInsets();
+  const { bottom } = useInsets();
   const [message, setMessage] = useState('');
 
   const sendMessageFn = useCallback(() => {
@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
   },
   input: {
     marginHorizontal: 10,
-    height: 30,
     flex: 8,
   },
   field: {

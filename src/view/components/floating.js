@@ -1,12 +1,12 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useInsets } from 'Utils/hooks';
 import Icon from 'Components/icon';
 import { Colors, Shadow } from 'Styles/colors';
 
 const Floating = ({ testID, icon, onClick, style }) => {
-  const { bottom } = useSafeAreaInsets();
+  const { bottom } = useInsets();
 
   return (
     <TouchableOpacity

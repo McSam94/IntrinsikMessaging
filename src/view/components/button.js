@@ -21,6 +21,7 @@ const Button = ({ testID, style, isLink, label, onClick, ...props }) => {
       onPress={onClick}
       {...props}>
       <Text
+        testID={testID ? `${testID}-label` : 'button-label'}
         style={[
           styles.label,
           {

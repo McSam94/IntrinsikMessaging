@@ -9,8 +9,26 @@ test('Render correctly', async (done) => {
     <Avatar uri="https://robohash.org/est.png?size=300x300" />,
   );
 
-  const selectedAvatar = getByTestId('avatar');
+  const avatar = getByTestId('avatar');
+  expect(avatar).toBeTruthy();
 
+  done();
+});
+
+test('Render selected correctly', async (done) => {
+  const { getByTestId } = render(<Avatar isSelected />);
+
+  const selectedAvatar = getByTestId('avatar-selected');
   expect(selectedAvatar).toBeTruthy();
+
+  done();
+});
+
+test('Render default correctly', async (done) => {
+  const { getByTestId } = render(<Avatar />);
+
+  const defaultAvatar = getByTestId('avatar-default');
+  expect(defaultAvatar).toBeTruthy();
+
   done();
 });
