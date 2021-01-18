@@ -41,6 +41,9 @@
 	"components": {
 		"list": {
 			"loading": "载入中..."
+		},
+		"loader": {
+			"loading": "载入中..."
 		}
 	},
 	"general": {

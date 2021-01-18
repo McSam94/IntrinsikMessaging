@@ -29,3 +29,5 @@ export const TOAST_CONFIG = {
 	error: ({ text1 }) => <Toast type="error" text={text1} />,
 	info: ({ text1 }) => <Toast type="info" text={text1} />,
 };
+
+export const API_DELAY = 1500;

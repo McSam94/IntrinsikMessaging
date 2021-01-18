@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useThemeColor, useTranslation } from 'Stores/ui';
@@ -14,7 +14,7 @@ import { name } from '../../../package.json';
 const Login = () => {
 	const { colorize } = useThemeColor();
 	const { translate } = useTranslation();
-	const { login } = useContext(AuthContext);
+	const { login, isLoggingIn } = useContext(AuthContext);
 	const { handleSubmit, control, errors } = useForm({
 		mode: 'onChange',
 	});
@@ -41,6 +41,7 @@ const Login = () => {
 						style={styles.logo}
 					/>
 					<Text
+						testID="login-name"
 						style={[
 							styles.name,
 							{
@@ -52,6 +53,7 @@ const Login = () => {
 				</View>
 				<View style={styles.form}>
 					<Text
+						testID="login-title"
 						style={[
 							styles.title,
 							{
@@ -61,6 +63,7 @@ const Login = () => {
 						{translate('screens.login.signin')}
 					</Text>
 					<ControlledInput
+						testID="login-username-input"
 						style={styles.input}
 						name="username"
 						control={control}
@@ -78,6 +81,7 @@ const Login = () => {
 						shouldAnimate
 					/>
 					<ControlledInput
+						testID="login-password-input"
 						style={styles.input}
 						name="password"
 						secureTextEntry
@@ -97,8 +101,10 @@ const Login = () => {
 					/>
 					<View style={styles.buttons}>
 						<Button
+							testID="login-submit-button"
 							label={translate('screens.login.signin')}
 							style={styles.button}
+							isLoading={isLoggingIn}
 							onClick={handleSubmit(onSubmit)}
 						/>
 						<Button

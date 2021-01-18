@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import { BASE_URL, FAKE_TOKEN } from '@env';
 import { getData } from 'Utils/local-storage';

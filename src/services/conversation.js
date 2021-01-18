@@ -1,4 +1,5 @@
 import { post } from './base';
+import { API_DELAY } from 'Utils/constants';
 
 const fakeGroupConversation = {
 	title: 'Happy Family',
@@ -193,24 +194,42 @@ const fakeNewConversation = [
 const ConversationSrv = {
 	getList: (conversationId, conversationPage) =>
 		// post('/q', {
-		//   data: {
-		//     isMe: 'numberBool',
-		//     isRead: 'numberBool',
-		//     timestamp: 'dateTime|ISOtime',
-		//     message: 'stringAlphaNum|1,200',
-		//     _repeat: 20,
-		//   },
+		// 	data: {
+		// 		id: 'stringAlphaNum',
+		// 		user: 'name',
+		// 		isRead: 'numberBool',
+		// 		timestamp: 'dateTime|ISOtime',
+		// 		message: 'stringWords|1,200',
+		// 		_repeat: 20,
+		// 	},
 		// }),
-		Promise.resolve({
-			status: 200,
-			data: /[8]/.test(conversationId)
-				? fakeConversation
-				: fakeGroupConversation,
+		new Promise((resolve) => {
+			setTimeout(() => {
+				resolve({
+					status: 200,
+					data: /[8]/.test(conversationId)
+						? fakeConversation
+						: fakeGroupConversation,
+				});
+			}, API_DELAY);
 		}),
 	newConversation: (isGroup) =>
-		Promise.resolve({
-			status: 200,
-			data: fakeNewConversation[isGroup ? 1 : 0],
+		// post('/q', {
+		// 	data: {
+		// 		isMe: 'numberBool',
+		// 		isRead: 'numberBool',
+		// 		timestamp: 'dateTime|ISOtime',
+		// 		message: 'stringWords|1,200',
+		// 		isGroup,
+		// 	},
+		// }),
+		new Promise((resolve) => {
+			setTimeout(() => {
+				resolve({
+					status: 200,
+					data: fakeNewConversation[isGroup ? 1 : 0],
+				});
+			}, API_DELAY);
 		}),
 	sendMessage: ({ message, file, image }) =>
 		Promise.resolve({

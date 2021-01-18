@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import { useThemeColor } from 'Stores/ui';
+import { useThemeColor, useTranslation } from 'Stores/ui';
 import { FontSize } from 'Styles/typography';
 import { Colors } from 'Styles/colors';
 
 const Loader = ({ testID, style, size, message, color }) => {
 	const { colorize } = useThemeColor();
+	const { translate } = useTranslation();
 
 	return (
 		<View testID={testID ?? 'loader'} style={[styles.container, style]}>
@@ -14,17 +15,15 @@ const Loader = ({ testID, style, size, message, color }) => {
 				size={size ?? 'large'}
 				color={color ?? Colors.primary}
 			/>
-			{message && (
-				<Text
-					style={[
-						styles.text,
-						{
-							color: colorize('textWashOut'),
-						},
-					]}>
-					{message}
-				</Text>
-			)}
+			<Text
+				style={[
+					styles.text,
+					{
+						color: colorize('textWashOut'),
+					},
+				]}>
+				{message ?? translate('components.loader.loading')}
+			</Text>
 		</View>
 	);
 };

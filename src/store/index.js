@@ -11,7 +11,6 @@ import {
 	Provider as ContactProvider,
 } from './contact';
 
-// eslint-disable-next-line react/prop-types
 const Providers = ({ children }) => {
 	return (
 		<UiProvider>

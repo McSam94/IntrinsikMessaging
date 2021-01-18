@@ -15,17 +15,14 @@ const Home = () => {
 	const { colorize } = useThemeColor();
 	const { navigate } = useNavigation();
 	const { translate } = useTranslation();
-	const {
-		chatList,
-		chatPage,
-		getChatList,
-		chatErrorMsg,
-		isGettingList,
-	} = useContext(ChatContext);
+	const { chatList, getChatList, chatErrorMsg, isGottenList } = useContext(
+		ChatContext,
+	);
 
 	const renderListItem = ({ item }) => {
 		return (
 			<ListItem
+				accessibilityLabel="home-item"
 				icon={<Avatar uri={item?.avatar} />}
 				title={item?.name}
 				description={item?.lastMessage}
@@ -41,15 +38,18 @@ const Home = () => {
 	};
 
 	useEffect(() => {
-		if (!chatList.length) {
+		if (!isGottenList) {
 			getChatList();
 		}
-	}, [chatList, getChatList]);
+	}, [isGottenList, getChatList]);
 
 	return (
 		<Layout>
-			<Header label={translate('screens.home.title')}>
+			<Header
+				testID="home-header"
+				label={translate('screens.home.title')}>
 				<Icon
+					testID="home-setting"
 					name="setting"
 					color={colorize('text')}
 					style={styles.icon}
@@ -57,15 +57,20 @@ const Home = () => {
 				/>
 			</Header>
 			<List
+				testID="home-list"
 				style={styles.list}
 				data={chatList}
-				isLoading={isGettingList && chatPage === 1}
+				isLoading={!isGottenList}
 				renderItem={renderListItem}
 				onMoreData={getChatList}
 				error={chatErrorMsg}
 				emptyMsg={translate('screens.home.empty')}
 			/>
-			<Floating icon="pen" onClick={() => navigate('Contact')} />
+			<Floating
+				testID="home-floating"
+				icon="pen"
+				onClick={() => navigate('Contact')}
+			/>
 		</Layout>
 	);
 };

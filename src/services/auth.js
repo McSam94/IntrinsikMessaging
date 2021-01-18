@@ -1,4 +1,4 @@
-import { post } from './base';
+// import { post } from './base';
 import { FAKE_TOKEN } from '@env';
 
 const fakeLoginResponse = {
@@ -12,9 +12,7 @@ const AuthSrv = {
 	login: ({ username, password }) => {
 		if (username && password) {
 			// return post('/q', {
-			//   data: {
-			//     token: FAKE_TOKEN,
-			//   },
+			// 	data: fakeLoginResponse,
 			// });
 			return Promise.resolve({
 				status: 200,

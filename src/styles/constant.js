@@ -6,4 +6,7 @@ export default {
 	LIST: {
 		PLACEHOLDER_HEIGHT: 250,
 	},
+	CONVERSATION: {
+		ANIMATION_DURATION: 300,
+	},
 };

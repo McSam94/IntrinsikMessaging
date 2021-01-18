@@ -7,14 +7,26 @@ import { Colors } from 'Styles/colors';
 import { FontSize } from 'Styles/typography';
 import FileMessage from './fileMessage';
 
-const Message = ({ user, image, message, file, timestamp, isRead }) => {
+const Message = ({
+	user,
+	image,
+	message,
+	file,
+	timestamp,
+	isRead,
+	accessibilityLabel,
+	...props
+}) => {
 	const { colorize } = useThemeColor();
 	const { translate } = useTranslation();
 	const { user: authUser } = useContext(AuthContext);
 	const isMe = authUser?.name === user;
 
 	return (
-		<View style={[styles.row, isMe ? styles.right : styles.left]}>
+		<View
+			style={[styles.row, isMe ? styles.right : styles.left]}
+			accessibilityLabel={accessibilityLabel}
+			{...props}>
 			<View
 				style={[
 					styles.box,
@@ -29,12 +41,14 @@ const Message = ({ user, image, message, file, timestamp, isRead }) => {
 				<View style={styles.messageContainer}>
 					{image && (
 						<Image
+							accessibilityLabel={`${accessibilityLabel}-image`}
 							source={{ uri: image }}
 							style={styles.messageImage}
 						/>
 					)}
 					{file && (
 						<FileMessage
+							accessibilityLabel={`${accessibilityLabel}-file`}
 							style={{
 								...styles.fileMessage,
 								borderColor: colorize('background'),

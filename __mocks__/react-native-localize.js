@@ -1,28 +1,22 @@
 const getLocales = () => [
-  // you can choose / add the locales you want
-  {
-    countryCode: 'US',
-    languageTag: 'en-US',
-    languageCode: 'en',
-    isRTL: false,
-  },
-  {
-    countryCode: 'FR',
-    languageTag: 'fr-FR',
-    languageCode: 'fr',
-    isRTL: false,
-  },
+	// you can choose / add the locales you want
+	{
+		countryCode: 'US',
+		languageTag: 'en',
+		languageCode: 'en',
+		isRTL: false,
+	},
 ];
 
 // use a provided translation, or return undefined to test your fallback
 const findBestAvailableLanguage = () => ({
-  languageTag: 'en-US',
-  isRTL: false,
+	languageTag: 'en',
+	isRTL: false,
 });
 
 const getNumberFormatSettings = () => ({
-  decimalSeparator: '.',
-  groupingSeparator: ',',
+	decimalSeparator: '.',
+	groupingSeparator: ',',
 });
 
 const getCalendar = () => 'gregorian'; // or "japanese", "buddhist"
@@ -37,16 +31,16 @@ const addEventListener = jest.fn();
 const removeEventListener = jest.fn();
 
 export {
-  findBestAvailableLanguage,
-  getLocales,
-  getNumberFormatSettings,
-  getCalendar,
-  getCountry,
-  getCurrencies,
-  getTemperatureUnit,
-  getTimeZone,
-  uses24HourClock,
-  usesMetricSystem,
-  addEventListener,
-  removeEventListener,
+	findBestAvailableLanguage,
+	getLocales,
+	getNumberFormatSettings,
+	getCalendar,
+	getCountry,
+	getCurrencies,
+	getTemperatureUnit,
+	getTimeZone,
+	uses24HourClock,
+	usesMetricSystem,
+	addEventListener,
+	removeEventListener,
 };

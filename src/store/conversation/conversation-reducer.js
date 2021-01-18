@@ -60,10 +60,12 @@ export const ConversationReducer = (state, action) => {
 			return {
 				...state,
 				isCreated: false,
+				isGottenList: false,
 				conversationId: '',
 				conversationTitle: '',
 				conversattionAvatar: '',
 				conversationList: [],
+				conversationPage: 1,
 			};
 		case conversationAction.SEND_MESSAGE.REQUEST:
 			return {

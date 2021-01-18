@@ -1,10 +1,23 @@
 import React, { memo } from 'react';
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
+import {
+	StyleSheet,
+	TouchableOpacity,
+	Text,
+	ActivityIndicator,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { useThemeColor } from 'Stores/ui';
 import { Colors, Shadow } from 'Styles/colors';
 
-const Button = ({ testID, style, isLink, label, onClick, ...props }) => {
+const Button = ({
+	testID,
+	style,
+	isLink,
+	isLoading,
+	label,
+	onClick,
+	...props
+}) => {
 	const { colorize } = useThemeColor();
 
 	return (
@@ -22,16 +35,22 @@ const Button = ({ testID, style, isLink, label, onClick, ...props }) => {
 			]}
 			onPress={onClick}
 			{...props}>
-			<Text
-				testID={testID ? `${testID}-label` : 'button-label'}
-				style={[
-					styles.label,
-					{
-						color: isLink ? Colors.primary : Colors.white,
-					},
-				]}>
-				{label}
-			</Text>
+			{isLoading ? (
+				<ActivityIndicator
+					color={isLink ? Colors.Primary : Colors.white}
+				/>
+			) : (
+				<Text
+					testID={testID ? `${testID}-label` : 'button-label'}
+					style={[
+						styles.label,
+						{
+							color: isLink ? Colors.primary : Colors.white,
+						},
+					]}>
+					{label}
+				</Text>
+			)}
 		</TouchableOpacity>
 	);
 };

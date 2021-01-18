@@ -4,7 +4,7 @@ import * as RNLocalize from 'react-native-localize';
 import i18n from 'i18n-js';
 import { useReducerContext } from 'Utils/hooks';
 import { Language } from 'Utils/constants';
-import { updateTheme, updateLang } from './ui-actions';
+import { init, updateTheme, updateLang } from './ui-actions';
 import { UIReducer } from './ui-reducer';
 import Themes from 'Styles/theme';
 import { getName } from './ui-factory';
@@ -15,10 +15,13 @@ const STORE_NAME = 'UIStore';
 const { Context, Provider } = useReducerContext({
 	reducer: UIReducer,
 	actions: {
+		init,
 		updateTheme,
 		updateLang,
 	},
 	initialState: {
+		isInitializing: false,
+		isInitialized: false,
 		theme: 'system',
 		lang: RNLocalize.getLocales()[0].languageTag,
 	},

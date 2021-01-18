@@ -12,6 +12,7 @@ import { useThemeColor } from 'Stores/ui';
 import { Colors } from 'Styles/colors';
 import { Controller } from 'react-hook-form';
 import CONSTANT from 'Styles/constant';
+import { FontSize } from 'Styles/typography';
 
 const Input = forwardRef(
 	(
@@ -197,15 +198,18 @@ const styles = StyleSheet.create({
 	},
 	errorContainer: {
 		borderBottomColor: Colors.error,
+		marginBottom: FontSize.M,
 	},
 	label: {
 		fontSize: 12,
 		position: 'absolute',
 	},
-	input: {},
+	input: {
+		height: '100%',
+	},
 	error: {
+		fontSize: FontSize.M,
 		color: Colors.error,
-		marginTop: 8,
 	},
 });
 

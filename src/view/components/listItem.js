@@ -13,6 +13,7 @@ const ListItem = ({
 	title,
 	description,
 	onClick,
+	...props
 }) => {
 	const { colorize } = useThemeColor();
 
@@ -20,13 +21,13 @@ const ListItem = ({
 		<TouchableOpacity
 			testID={testID ?? 'listitem'}
 			style={[styles.listItem, style]}
-			onPress={onClick}>
+			onPress={onClick}
+			{...props}>
 			{icon}
-			<View
-				testID={testID ? `${testID}-title` : 'listitem-title'}
-				style={styles.info}>
+			<View style={styles.info}>
 				{title && (
 					<Text
+						testID={testID ? `${testID}-title` : 'listitem-title'}
 						style={[
 							styles.title,
 							{

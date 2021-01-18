@@ -57,7 +57,7 @@ const List = ({
 	if (isLoading) {
 		return (
 			<Loader
-				testID="list-loading"
+				testID={testID ? `${testID}-loading` : 'list-loading'}
 				message={translate('components.list.loading')}
 			/>
 		);

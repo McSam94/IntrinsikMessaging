@@ -41,6 +41,9 @@
 	"components": {
 		"list": {
 			"loading": "Loading..."
+		},
+		"loader": {
+			"loading": "loading..."
 		}
 	},
 	"general": {

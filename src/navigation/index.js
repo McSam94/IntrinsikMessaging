@@ -5,35 +5,48 @@ import {
 	DarkTheme,
 } from '@react-navigation/native';
 import { useTranslation, useThemeColor } from 'Stores/ui';
-import { AuthContext } from 'Stores';
+import { AuthContext, UiContext } from 'Stores';
 import { translationGetters } from 'i18n';
 import LoginScreen from 'Screens/login';
+import Loader from 'Components/loader';
 import ProtectedRoute from './protected';
-import Loading from 'Screens/loading';
 
 const Navigation = () => {
-	const { token, init, isInitialized, isInitializing } = useContext(
-		AuthContext,
+	const {
+		token,
+		init: initAuth,
+		isInitialized: isAuthInitialized,
+	} = useContext(AuthContext);
+	const { init: initUi, isInitialized: isUiInitialized } = useContext(
+		UiContext,
 	);
 	const { setTranslation } = useTranslation();
 	const { appTheme } = useThemeColor();
 
-	setTranslation(translationGetters);
+	useEffect(() => {
+		setTranslation(translationGetters);
+	}, [setTranslation]);
 
 	useEffect(() => {
-		if (!token && !isInitialized) {
-			init();
+		if (!isAuthInitialized) {
+			initAuth();
 		}
-	}, [token, init, isInitialized]);
+	}, [initAuth, isAuthInitialized]);
+
+	useEffect(() => {
+		if (!isUiInitialized) {
+			initUi();
+		}
+	}, [initUi, isUiInitialized]);
+
+	if (!isAuthInitialized || !isUiInitialized) {
+		return <Loader testID="init-loader" />;
+	}
 
 	return (
 		<NavigationContainer
 			theme={appTheme === 'dark' ? DarkTheme : DefaultTheme}>
-			{isInitialized & !isInitializing ? (
-				<>{token ? <ProtectedRoute /> : <LoginScreen />}</>
-			) : (
-				<Loading />
-			)}
+			{token ? <ProtectedRoute /> : <LoginScreen />}
 		</NavigationContainer>
 	);
 };

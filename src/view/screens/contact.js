@@ -21,7 +21,7 @@ const Contact = () => {
 	const { colorize } = useThemeColor();
 	const {
 		contactList,
-		isGettingList,
+		isGottenList,
 		getContactList,
 		contactErrorMsg,
 	} = useContext(ContactContext);
@@ -78,7 +78,11 @@ const Contact = () => {
 
 	const renderListItem = ({ item }) => (
 		<View style={styles.catList}>
-			<Text style={styles.category}>{item}</Text>
+			<Text
+				accessibilityLabel={`contact-category-${item}`}
+				style={styles.category}>
+				{item}
+			</Text>
 			<View style={styles.contactListItem}>
 				{transformContact(contactList)?.[item]?.map((contact) => {
 					const isSelected = selectedContacts?.some(
@@ -87,6 +91,7 @@ const Contact = () => {
 					);
 					return (
 						<ListItem
+							accessibilityLabel="contact-item"
 							key={contact?.id}
 							style={styles.listItem}
 							icon={
@@ -111,17 +116,19 @@ const Contact = () => {
 	);
 
 	useEffect(() => {
-		if (!contactList.length) {
+		if (!isGottenList) {
 			getContactList();
 		}
-	}, [contactList, getContactList]);
+	}, [isGottenList, getContactList]);
 
 	return (
 		<Layout>
 			<Header
+				testID="contact-header"
 				label={translate('screens.contact.title')}
 				navigate={navigateBack}>
 				<Icon
+					testID="contact-proceed"
 					name="rightArrow"
 					style={styles.icon}
 					color={colorize('text')}
@@ -129,9 +136,10 @@ const Contact = () => {
 				/>
 			</Header>
 			<List
+				testID="contact-list"
 				style={styles.contactList}
 				data={Object.keys(transformContact(contactList))}
-				isLoading={isGettingList}
+				isLoading={!isGottenList}
 				renderItem={renderListItem}
 				error={contactErrorMsg}
 				emptyMsg={translate('screens.contact.empty')}

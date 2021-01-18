@@ -1,5 +1,10 @@
 import React from 'react';
-import { cleanup, render, fireEvent } from '@testing-library/react-native';
+import {
+	cleanup,
+	render,
+	fireEvent,
+	waitFor,
+} from '@testing-library/react-native';
 import '@testing-library/jest-native/extend-expect';
 import { UpdateThemeProvider } from 'Test/mock-fn';
 import { Colors } from 'Styles/colors';
@@ -9,7 +14,6 @@ import CONSTANT from 'Styles/constant';
 afterEach(cleanup);
 
 test('Render correctly', async () => {
-	jest.useFakeTimers('legacy');
 	const { getByTestId } = render(
 		<UpdateThemeProvider>
 			<Input label="Test" shouldAnimate />
@@ -32,12 +36,13 @@ test('Render correctly', async () => {
 
 	// onFocus
 	fireEvent(inputField, 'focus');
-	global.timeTravel(CONSTANT.INPUT.ANIMATION_DURATION);
-	expect(inputLabel).toHaveStyle({
-		color: Colors.primary,
-		backgroundColor: Colors.white,
-		fontSize: 13,
-		top: (CONSTANT.INPUT.HEIGHT / 6) * -1,
+	await waitFor(() => {
+		expect(inputLabel).toHaveStyle({
+			color: Colors.primary,
+			backgroundColor: Colors.white,
+			fontSize: 13,
+			top: (CONSTANT.INPUT.HEIGHT / 6) * -1,
+		});
 	});
 
 	// darkMode
@@ -50,14 +55,15 @@ test('Render correctly', async () => {
 	});
 
 	fireEvent(inputField, 'blur');
-	global.timeTravel(CONSTANT.INPUT.ANIMATION_DURATION);
-	expect(inputLabel).toHaveStyle({
-		color: Colors.light,
-		backgroundColor: 'transparent',
+	await waitFor(() => {
+		expect(inputLabel).toHaveStyle({
+			color: Colors.light,
+			backgroundColor: 'transparent',
+		});
 	});
-}, 30000);
+});
 
-test('Render with underline correctly', (done) => {
+test('Render with underline correctly', async () => {
 	const { getByTestId } = render(
 		<UpdateThemeProvider>
 			<Input underline label="Test" shouldAnimate />
@@ -83,15 +89,16 @@ test('Render with underline correctly', (done) => {
 
 	// onClick
 	fireEvent(inputField, 'focus');
-	global.timeTravel(CONSTANT.INPUT.ANIMATION_DURATION);
-	expect(inputContainer).toHaveStyle({
-		borderBottomColor: Colors.primary,
-	});
-	expect(inputLabel).toHaveStyle({
-		color: Colors.primary,
-		backgroundColor: Colors.white,
-		fontSize: 13,
-		top: (CONSTANT.INPUT.HEIGHT / 6) * -1,
+	await waitFor(() => {
+		expect(inputContainer).toHaveStyle({
+			borderBottomColor: Colors.primary,
+		});
+		expect(inputLabel).toHaveStyle({
+			color: Colors.primary,
+			backgroundColor: Colors.white,
+			fontSize: 13,
+			top: (CONSTANT.INPUT.HEIGHT / 6) * -1,
+		});
 	});
 
 	// darkMode
@@ -104,14 +111,13 @@ test('Render with underline correctly', (done) => {
 	});
 
 	fireEvent(inputField, 'blur');
-	global.timeTravel(CONSTANT.INPUT.ANIMATION_DURATION);
-	expect(inputContainer).toHaveStyle({
-		borderBottomColor: Colors.light,
+	await waitFor(() => {
+		expect(inputContainer).toHaveStyle({
+			borderBottomColor: Colors.light,
+		});
+		expect(inputLabel).toHaveStyle({
+			color: Colors.light,
+			backgroundColor: 'transparent',
+		});
 	});
-	expect(inputLabel).toHaveStyle({
-		color: Colors.light,
-		backgroundColor: 'transparent',
-	});
-
-	done();
 });

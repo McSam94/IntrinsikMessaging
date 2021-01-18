@@ -1,4 +1,5 @@
-import { post } from './base';
+// import { post } from './base';
+import { API_DELAY } from 'Utils/constants';
 
 const fakeChatList = [
 	{
@@ -82,20 +83,24 @@ const fakeChatList = [
 ];
 
 const ChatSrv = {
-	getList: () =>
+	getList: async () =>
 		// post('/q', {
-		//   data: {
-		//     id: 'stringAlphaNum',
-		//     name: 'name',
-		//     phone: 'phoneMobile',
-		//     avatar: 'personAvatar',
-		//     lastMessage: 'stringWords|12,50',
-		//     _repeat: 25,
-		//   },
+		// 	data: {
+		// 		id: 'stringAlphaNum',
+		// 		name: 'name',
+		// 		phone: 'phoneMobile',
+		// 		avatar: 'personAvatar',
+		// 		lastMessage: 'stringWords|12,50',
+		// 		_repeat: 25,
+		// 	},
 		// }),
-		Promise.resolve({
-			status: 200,
-			data: fakeChatList,
+		new Promise((resolve) => {
+			setTimeout(() => {
+				resolve({
+					status: 200,
+					data: fakeChatList,
+				});
+			}, API_DELAY);
 		}),
 };
 

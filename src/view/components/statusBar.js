@@ -8,7 +8,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const StatusBar = ({ backgroundColor, barStyle, transparent, ...props }) => {
-	const insets = useSafeAreaInsets();
+	const { top } = useSafeAreaInsets();
 
 	return (
 		<>
@@ -24,7 +24,7 @@ const StatusBar = ({ backgroundColor, barStyle, transparent, ...props }) => {
 					style={[
 						styles.container,
 						{
-							height: insets.top,
+							height: top,
 							backgroundColor: backgroundColor,
 						},
 						transparent ? styles.transparentStatusBar : {},

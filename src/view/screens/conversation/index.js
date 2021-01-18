@@ -20,10 +20,9 @@ import Icon from 'Components/icon';
 import { FontSize } from 'Styles/typography';
 import { Colors, Shadow } from 'Styles/colors';
 import { ALLOWED_FILE_TYPE } from 'Utils/constants';
+import CONSTANT from 'Styles/constant';
 import Message from './message';
 import Footer from './footer';
-
-const ANIMATION_DURATION = 300;
 
 const Conversation = () => {
 	const { navigate } = useNavigation();
@@ -39,7 +38,7 @@ const Conversation = () => {
 	const {
 		getConversation,
 		newConversation,
-		isGettingList,
+		isGottenList,
 		isCreating,
 		isCreated,
 		isGroupConversation,
@@ -92,7 +91,6 @@ const Conversation = () => {
 					});
 				} else {
 					setFilePreview(null);
-					console.log(uri);
 					setImagePreview(uri);
 				}
 			},
@@ -134,13 +132,13 @@ const Conversation = () => {
 	});
 
 	const renderConversation = ({ item }) => {
-		return <Message {...item} />;
+		return <Message accessibilityLabel="conversation-message" {...item} />;
 	};
 
 	useEffect(() => {
 		Animated.timing(shouldShow, {
 			toValue: isMediaVisible ? 1 : 0,
-			duration: ANIMATION_DURATION,
+			duration: CONSTANT.CONVERSATION.ANIMATION_DURATION,
 			useNativeDriver: false,
 		}).start();
 	}, [isMediaVisible, shouldShow]);
@@ -150,7 +148,7 @@ const Conversation = () => {
 			newConversation(contactIds);
 		}
 		if (!contactIds && conversationId) {
-			if (!conversationList.length) {
+			if (!isGottenList) {
 				getConversation(conversationId, conversationPage);
 			}
 		}
@@ -164,7 +162,7 @@ const Conversation = () => {
 		newConversation,
 		getConversation,
 		resetConversation,
-		conversationList,
+		isGottenList,
 	]);
 
 	useEffect(() => {
@@ -174,6 +172,7 @@ const Conversation = () => {
 	return (
 		<Layout>
 			<Header
+				testID="conversation-header"
 				style={styles.header}
 				label={name}
 				avatar={<Avatar uri={avatar} style={styles.avatar} />}
@@ -181,8 +180,9 @@ const Conversation = () => {
 			/>
 			<View style={styles.conversation}>
 				<List
+					testID="conversation-list"
 					data={conversationList}
-					isLoading={isGettingList && conversationPage === 1}
+					isLoading={!isGottenList}
 					renderItem={renderConversation}
 					onMoreData={loadMoreData}
 					error={conversationErrorMsg}
@@ -191,6 +191,7 @@ const Conversation = () => {
 					inverted
 				/>
 				<Animated.View
+					testID="conversation-tools"
 					style={[
 						styles.mediaContainer,
 						{
@@ -198,16 +199,19 @@ const Conversation = () => {
 						},
 					]}>
 					<MediaButton
+						testID="conversation-camera"
 						icon="camera"
 						label={translate('screens.conversation.camera')}
 						onClick={openCamera}
 					/>
 					<MediaButton
+						testID="conversation-gallery"
 						icon="image"
 						label={translate('screens.conversation.image')}
 						onClick={openGallery}
 					/>
 					<MediaButton
+						testID="conversation-file"
 						icon="file"
 						label={translate('screens.conversation.file')}
 						onClick={openFilePicker}
@@ -215,6 +219,7 @@ const Conversation = () => {
 				</Animated.View>
 			</View>
 			<Footer
+				testID="conversation-footer"
 				image={imagePreview}
 				file={filePreview}
 				onClosePreview={closePreview}
@@ -225,11 +230,12 @@ const Conversation = () => {
 	);
 };
 
-const MediaButton = ({ icon, label, onClick }) => {
+const MediaButton = ({ testID, icon, label, onClick }) => {
 	const { colorize } = useThemeColor();
 
 	return (
 		<Icon
+			testID={testID}
 			name={icon}
 			label={label}
 			color={Colors.primary}

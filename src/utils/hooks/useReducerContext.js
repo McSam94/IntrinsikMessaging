@@ -9,7 +9,7 @@ export const useReducerContext = ({
 	const Context = createContext(initialState);
 
 	// eslint-disable-next-line react/prop-types
-	const Provider = ({ children }) => {
+	const Provider = ({ children, value }) => {
 		const [state, dispatch] = useReducer(reducer, initialState);
 
 		const boundActions = {};
@@ -19,7 +19,7 @@ export const useReducerContext = ({
 
 		return (
 			<Context.Provider
-				value={{ ...state, ...boundActions }}
+				value={{ ...state, ...boundActions, ...value }}
 				displayName={displayName}>
 				{children}
 			</Context.Provider>

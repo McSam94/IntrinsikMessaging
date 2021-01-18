@@ -21,3 +21,12 @@ export const getGroupName = (contactList) => {
 		return naming;
 	}, '');
 };
+
+export const isJSON = (value) => {
+	try {
+		JSON.parse(value);
+		return true;
+	} catch (e) {
+		return false;
+	}
+};

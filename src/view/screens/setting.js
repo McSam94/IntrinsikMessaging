@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Layout from 'Components/layout';
 import Header from 'Components/header';
@@ -6,7 +6,6 @@ import ListItem from 'Components/listItem';
 import Icon from 'Components/icon';
 import { useTranslation, useThemeColor } from 'Stores/ui';
 import { UiContext, AuthContext } from 'Stores';
-import { getData, storeData } from 'Utils/local-storage';
 import { StyleSheet } from 'react-native';
 
 const THEME = ['dark', 'light'];
@@ -16,28 +15,24 @@ const Setting = () => {
 	const { canGoBack, goBack } = useNavigation();
 	const { appTheme, colorize } = useThemeColor();
 	const { translate, languageName } = useTranslation();
-	const { updateTheme, updateLang, lang } = useContext(UiContext);
+	const { updateTheme, updateLang, lang, theme } = useContext(UiContext);
 	const { logout } = useContext(AuthContext);
 
 	const updateThemeFn = useCallback(async () => {
-		const theme = (await getData('@theme')) ?? 'light';
 		const newThemeIndex =
 			THEME.indexOf(theme) === THEME.length - 1
 				? 0
 				: THEME.indexOf(theme) + 1;
 
 		updateTheme(THEME[newThemeIndex]);
-	}, [updateTheme]);
+	}, [updateTheme, theme]);
 
 	const updateLangFn = useCallback(async () => {
-		const language = (await getData('@lang')) ?? 'en';
 		const newLangIndex =
-			LANG.indexOf(language) === LANG.length - 1
-				? 0
-				: LANG.indexOf(language) + 1;
+			LANG.indexOf(lang) === LANG.length - 1 ? 0 : LANG.indexOf(lang) + 1;
 
 		updateLang(LANG[newLangIndex]);
-	}, [updateLang]);
+	}, [updateLang, lang]);
 
 	const navigateBack = useCallback(() => {
 		if (canGoBack) {
@@ -57,14 +52,6 @@ const Setting = () => {
 				return 'system';
 		}
 	}, [appTheme]);
-
-	useEffect(() => {
-		storeData('@theme', appTheme);
-	}, [appTheme]);
-
-	useEffect(() => {
-		storeData('@lang', lang);
-	}, [lang]);
 
 	return (
 		<Layout>

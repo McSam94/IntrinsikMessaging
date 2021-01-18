@@ -10,6 +10,7 @@ import { Colors } from 'Styles/colors';
 import FileMessage from './fileMessage';
 
 const Footer = ({
+	testID,
 	image,
 	file,
 	onClosePreview,
@@ -34,6 +35,7 @@ const Footer = ({
 
 	return (
 		<View
+			testID={testID}
 			style={[
 				styles.footer,
 				{
@@ -61,19 +63,30 @@ const Footer = ({
 						/>
 					</View>
 					{image && (
-						<Image source={{ uri: image }} style={styles.preview} />
+						<Image
+							testID="conversation-image-preview"
+							source={{ uri: image }}
+							style={styles.preview}
+						/>
 					)}
-					{file && <FileMessage name={file?.name} />}
+					{file && (
+						<FileMessage
+							testID="conversation-file-preview"
+							name={file?.name}
+						/>
+					)}
 				</View>
 			)}
 			<View style={styles.inputContainer}>
 				<Icon
+					testID="conversation-clip"
 					name="clip"
 					style={styles.attach}
 					color={colorize('textWashOut')}
 					onClick={onOpenMedia}
 				/>
 				<Input
+					testID="conversation-input"
 					style={styles.input}
 					inputStyle={styles.field}
 					placeholder={translate('screens.conversation.type')}
@@ -83,6 +96,7 @@ const Footer = ({
 					multiline
 				/>
 				<Icon
+					testID="conversation-send"
 					name="send"
 					style={styles.send}
 					color={Colors.primary}
@@ -135,7 +149,7 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		marginHorizontal: 10,
-		flex: 8,
+		flex: 1,
 	},
 	field: {
 		height: '100%',
@@ -148,8 +162,9 @@ const styles = StyleSheet.create({
 });
 
 Footer.propTypes = {
-	filePreview: PropTypes.object,
-	imagePreview: PropTypes.string,
+	testID: PropTypes.string,
+	file: PropTypes.object,
+	image: PropTypes.string,
 	onClosePreview: PropTypes.func,
 	onOpenMedia: PropTypes.func,
 	onSendMessage: PropTypes.func,

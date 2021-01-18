@@ -1,4 +1,5 @@
-import { post } from './base';
+// import { post } from './base';
+import { API_DELAY } from 'Utils/constants';
 
 const fakeContactList = [
 	{
@@ -66,17 +67,21 @@ const fakeContactList = [
 const ContactSrv = {
 	getList: () =>
 		// post('/q', {
-		//   data: {
-		//     id: 'stringAlphaNum',
-		//     name: 'personNickname',
-		//     mobile: 'phoneMobile',
-		//     avatar: 'personAvatar',
-		//     _repeat: 35,
-		//   },
+		// 	data: {
+		// 		id: 'stringAlphaNum',
+		// 		name: 'personNickname',
+		// 		mobile: 'phoneMobile',
+		// 		avatar: 'personAvatar',
+		// 		_repeat: 35,
+		// 	},
 		// }),
-		Promise.resolve({
-			status: 200,
-			data: fakeContactList,
+		new Promise((resolve) => {
+			setTimeout(() => {
+				resolve({
+					status: 200,
+					data: fakeContactList,
+				});
+			}, API_DELAY);
 		}),
 };
 

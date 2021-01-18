@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { UiContext } from 'Stores';
 import { Provider as UiProvider } from 'Stores/ui';
+import { Provider as AuthProvider } from 'Stores/auth';
 
 export function TestSafeAreaProvider({ children }) {
 	return (
@@ -33,5 +34,13 @@ function UpdateThemeConsumer() {
 			testID="darkmode-button"
 			onPress={() => updateTheme('dark')}
 		/>
+	);
+}
+
+export function MockProvider({ children }) {
+	return (
+		<AuthProvider value={{ isInitialized: true }}>
+			<UiProvider value={{ isInitialized: true }}>{children}</UiProvider>
+		</AuthProvider>
 	);
 }
