@@ -1,4 +1,4 @@
-export default {
+export default Object.freeze({
 	INPUT: {
 		HEIGHT: 42,
 		ANIMATION_DURATION: 300,
@@ -9,4 +9,4 @@ export default {
 	CONVERSATION: {
 		ANIMATION_DURATION: 300,
 	},
-};
+});
