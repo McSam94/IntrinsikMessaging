@@ -75,7 +75,6 @@ export const getConversation = (dispatch) => {
 					});
 				}
 			} catch (error) {
-				console.error(error);
 				dispatch({
 					type: conversationAction.CONVERSATION_LIST.FAIL,
 					payload: { conversationErrorMsg: error?.data },

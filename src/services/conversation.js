@@ -1,4 +1,4 @@
-import { post } from './base';
+// import { post } from './base';
 import { API_DELAY } from 'Utils/constants';
 
 const fakeGroupConversation = {

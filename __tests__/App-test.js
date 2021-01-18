@@ -10,7 +10,7 @@ import App from '../App';
 import renderer from 'react-test-renderer';
 
 it('renders correctly', async (done) => {
-  renderer.create(<App />);
+	renderer.create(<App />);
 
-  done();
+	done();
 });

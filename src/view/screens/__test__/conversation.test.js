@@ -61,12 +61,7 @@ test('Should render correctly', async () => {
 });
 
 test('Send image from camera', async () => {
-	const {
-		getByTestId,
-		queryByTestId,
-		queryAllByA11yLabel,
-		findByTestId,
-	} = render(
+	const { getByTestId, queryByTestId, queryAllByA11yLabel } = render(
 		<TestSafeAreaProvider>
 			<Providers>
 				<Conversation />

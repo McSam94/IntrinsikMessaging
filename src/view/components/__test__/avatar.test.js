@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, render, fireEvent } from '@testing-library/react-native';
+import { cleanup, render } from '@testing-library/react-native';
 import Avatar from '../avatar';
 
 afterEach(cleanup);

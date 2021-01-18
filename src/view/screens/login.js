@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useThemeColor, useTranslation } from 'Stores/ui';
