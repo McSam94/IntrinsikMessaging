@@ -44,6 +44,7 @@ export const ConversationReducer = (state, action) => {
 				...state,
 				isCreating: false,
 				isCreated: true,
+				isGottenList: true,
 				conversationId: action?.payload?.conversationId,
 				conversationTitle: action?.payload?.conversationTitle,
 				conversationAvatar: action?.payload?.conversationAvatar,

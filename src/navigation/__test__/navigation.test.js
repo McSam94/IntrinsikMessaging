@@ -24,7 +24,7 @@ test('Navigate home after login', async () => {
 			</Providers>
 		</TestSafeAreaProvider>,
 	);
-	const { queryByTestId } = renderer;
+	const { queryByTestId, findByTestId } = renderer;
 
 	await global.login(renderer);
 
@@ -41,7 +41,7 @@ test('Navigate to conversation after select a conversation', async () => {
 			</Providers>
 		</TestSafeAreaProvider>,
 	);
-	const { queryByTestId, queryAllByA11yLabel } = renderer;
+	const { findByTestId, queryByTestId, queryAllByA11yLabel } = renderer;
 
 	await global.login(renderer);
 
@@ -56,6 +56,7 @@ test('Navigate to conversation after select a conversation', async () => {
 			firstName,
 		);
 	});
+	await findByTestId('conversation-list');
 }, 15000);
 
 test('Navigate contact after select pen icon', async () => {
@@ -68,7 +69,7 @@ test('Navigate contact after select pen icon', async () => {
 			</Providers>
 		</TestSafeAreaProvider>,
 	);
-	const { queryByTestId } = renderer;
+	const { queryByTestId, findByTestId } = renderer;
 
 	await global.login(renderer);
 
@@ -78,6 +79,10 @@ test('Navigate contact after select pen icon', async () => {
 			'Contact',
 		);
 	});
+	await waitForElementToBeRemoved(() =>
+		queryByTestId('contact-list-loading'),
+	);
+	await findByTestId('contact-list');
 });
 
 test('Navigate new conversation selected contact', async () => {
@@ -115,4 +120,9 @@ test('Navigate new conversation selected contact', async () => {
 
 	fireEvent.press(queryByTestId('contact-proceed'));
 	await findByTestId('conversation-header');
-});
+
+	const emptyMessage = await findByTestId('conversation-list-message');
+	expect(emptyMessage).toHaveTextContent(
+		'No conversation found. Start chatting now.',
+	);
+}, 25000);
