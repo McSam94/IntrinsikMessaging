@@ -24,7 +24,7 @@ test('Navigate home after login', async () => {
 			</Providers>
 		</TestSafeAreaProvider>,
 	);
-	const { queryByTestId, findByTestId } = renderer;
+	const { queryByTestId } = renderer;
 
 	await global.login(renderer);
 
