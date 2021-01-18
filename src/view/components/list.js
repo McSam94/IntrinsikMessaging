@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
 	ActivityIndicator,
@@ -30,7 +30,6 @@ const List = ({
 	const { colorize } = useThemeColor();
 	const { translate } = useTranslation();
 	const { width } = useWindowDimensions();
-	const footerComponent = useMemo(() => <ActivityIndicator />, []);
 	const seperatorComponent = useCallback(() => {
 		if (shouldShowSeperator) {
 			return (
@@ -69,7 +68,7 @@ const List = ({
 					ItemSeparatorComponent={seperatorComponent}
 					onEndReachedThreshold={0.5}
 					onEndReached={onMoreData}
-					ListFooterComponent={footerComponent}
+					ListFooterComponent={<ActivityIndicator />}
 					{...props}
 				/>
 			) : (

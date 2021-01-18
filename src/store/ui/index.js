@@ -71,6 +71,7 @@ const useTranslation = () => {
 				) ||
 				fallback;
 
+			console.log(languageTag);
 			I18nManager.forceRTL(isRTL);
 			i18n.translations = {
 				[languageTag]: translationGetters[languageTag](),

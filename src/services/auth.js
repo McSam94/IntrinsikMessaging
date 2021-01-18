@@ -1,5 +1,6 @@
 // import { post } from './base';
 import { FAKE_TOKEN } from '@env';
+import { API_DELAY } from 'Utils/constants';
 
 const fakeLoginResponse = {
 	token: FAKE_TOKEN,
@@ -14,9 +15,13 @@ const AuthSrv = {
 			// return post('/q', {
 			// 	data: fakeLoginResponse,
 			// });
-			return Promise.resolve({
-				status: 200,
-				data: fakeLoginResponse,
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve({
+						status: 200,
+						data: fakeLoginResponse,
+					});
+				}, API_DELAY);
 			});
 		} else {
 			return Promise.reject();
