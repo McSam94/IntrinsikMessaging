@@ -6,7 +6,6 @@ export const ConversationReducer = (state, action) => {
 			return {
 				...state,
 				isGettingList: true,
-				isGottenList: false,
 				conversationErrorMsg: '',
 			};
 		case conversationAction.CONVERSATION_LIST.SUCCESS:

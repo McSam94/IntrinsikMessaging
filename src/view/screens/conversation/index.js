@@ -11,7 +11,7 @@ import DocumentPicker from 'react-native-document-picker';
 import Toast from 'react-native-toast-message';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTranslation, useThemeColor } from 'Stores/ui';
-import { ConversationContext } from 'Stores';
+import { ConversationContext, ChatContext } from 'Stores';
 import Layout from 'Components/layout';
 import Header from 'Components/header';
 import Avatar from 'Components/avatar';
@@ -223,7 +223,7 @@ const Conversation = () => {
 				image={imagePreview}
 				file={filePreview}
 				onClosePreview={closePreview}
-				onOpenMedia={openMedia}
+				onClipClick={openMedia}
 				onSendMessage={sendMessageFn}
 			/>
 		</Layout>

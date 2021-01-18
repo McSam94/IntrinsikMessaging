@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Image, StyleSheet } from 'react-native';
 import Images from 'Assets/images';
@@ -6,6 +6,12 @@ import Icon from 'Components/icon';
 import { Colors } from 'Styles/colors';
 
 const Avatar = ({ testID, style, isSelected, color, uri }) => {
+	const [isDefault, setIsDefault] = useState(true);
+
+	const onImageLoad = useCallback(() => {
+		setIsDefault(false);
+	}, [setIsDefault]);
+
 	if (isSelected) {
 		return (
 			<Icon
@@ -45,7 +51,8 @@ const Avatar = ({ testID, style, isSelected, color, uri }) => {
 	return (
 		<Image
 			testID={testID ?? 'avatar'}
-			source={{ uri }}
+			source={isDefault ? Images.User : { uri }}
+			onLoad={onImageLoad}
 			defaultSource={Images.User}
 			style={[styles.avatar, style]}
 		/>

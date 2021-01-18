@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
 	transparentStatusBar: {
 		position: 'absolute',
 	},
-	backgroundTransparent: { backgroundColor: 'transparent' },
 });
 
 export default StatusBar;

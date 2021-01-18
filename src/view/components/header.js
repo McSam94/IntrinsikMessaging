@@ -17,8 +17,21 @@ const Header = ({
 	const { colorize } = useThemeColor();
 
 	return (
-		<View testID={testID ?? 'header-container'} style={styles.container}>
-			<View style={styles.titleContainer}>
+		<View
+			testID={testID ?? 'header-container'}
+			style={[
+				styles.container,
+				{
+					backgroundColor: colorize('background'),
+				},
+			]}>
+			<View
+				style={[
+					styles.titleContainer,
+					{
+						backgroundColor: colorize('background'),
+					},
+				]}>
 				{navigate && (
 					<Icon
 						testID={
@@ -30,7 +43,13 @@ const Header = ({
 						onClick={navigate}
 					/>
 				)}
-				<View style={styles.headerContent}>
+				<View
+					style={[
+						styles.headerContent,
+						{
+							backgroundColor: colorize('background'),
+						},
+					]}>
 					{avatar}
 					<Text
 						testID={testID ? `${testID}-title` : 'header-title'}

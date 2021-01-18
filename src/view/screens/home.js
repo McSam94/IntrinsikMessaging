@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation, useThemeColor } from 'Stores/ui';
-import { ChatContext } from 'Stores';
+import { ChatContext, ConversationContext } from 'Stores';
 import Header from 'Components/header';
 import List from 'Components/list';
 import Floating from 'Components/floating';
@@ -18,6 +18,7 @@ const Home = () => {
 	const { chatList, getChatList, chatErrorMsg, isGottenList } = useContext(
 		ChatContext,
 	);
+	const { isCreated } = useContext(ConversationContext);
 
 	const renderListItem = ({ item }) => {
 		return (
@@ -38,10 +39,10 @@ const Home = () => {
 	};
 
 	useEffect(() => {
-		if (!isGottenList) {
+		if (!isGottenList || isCreated) {
 			getChatList();
 		}
-	}, [isGottenList, getChatList]);
+	}, [isCreated, isGottenList, getChatList]);
 
 	return (
 		<Layout>

@@ -33,13 +33,14 @@ const useThemeColor = () => {
 	const systemTheme = useColorScheme();
 
 	const appTheme = useMemo(
-		() => (theme === 'system' ? systemTheme : theme) || 'system',
+		() => (theme === 'system' ? systemTheme : theme ?? 'light'),
 		[theme, systemTheme],
 	);
 
-	const colorize = useCallback((colorName) => Themes[appTheme][colorName], [
-		appTheme,
-	]);
+	const colorize = useCallback(
+		(colorName) => Themes?.[appTheme]?.[colorName],
+		[appTheme],
+	);
 
 	return { appTheme, colorize };
 };

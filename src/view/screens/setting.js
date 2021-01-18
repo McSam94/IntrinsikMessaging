@@ -9,7 +9,7 @@ import { UiContext, AuthContext } from 'Stores';
 import { StyleSheet } from 'react-native';
 
 const THEME = ['dark', 'light'];
-const LANG = ['en-US', 'zh'];
+const LANG = ['en', 'zh'];
 
 const Setting = () => {
 	const { canGoBack, goBack } = useNavigation();

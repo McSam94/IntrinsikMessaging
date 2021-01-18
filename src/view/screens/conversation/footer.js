@@ -14,7 +14,7 @@ const Footer = ({
 	image,
 	file,
 	onClosePreview,
-	onOpenMedia,
+	onClipClick,
 	onSendMessage,
 }) => {
 	const { colorize } = useThemeColor();
@@ -83,7 +83,7 @@ const Footer = ({
 					name="clip"
 					style={styles.attach}
 					color={colorize('textWashOut')}
-					onClick={onOpenMedia}
+					onClick={onClipClick}
 				/>
 				<Input
 					testID="conversation-input"

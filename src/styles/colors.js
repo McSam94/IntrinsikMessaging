@@ -20,10 +20,10 @@ export const Shadow = {
 	shadowColor: Colors.washout,
 	shadowOffset: {
 		width: 0,
-		height: 5,
+		height: 2,
 	},
-	shadowOpacity: 0.34,
-	shadowRadius: 6.27,
+	shadowOpacity: 0.23,
+	shadowRadius: 2.62,
 
-	elevation: 10,
+	elevation: 4,
 };

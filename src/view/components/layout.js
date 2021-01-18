@@ -39,15 +39,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 	},
-	list: {},
-	listItem: {
-		paddingVertical: 25,
-		paddingHorizontal: 15,
-	},
-	placeholder: {
-		width: '100%',
-		height: '100%',
-	},
 });
 
 export default memo(Layout);

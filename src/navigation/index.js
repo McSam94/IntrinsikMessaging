@@ -23,9 +23,7 @@ const Navigation = () => {
 	const { setTranslation } = useTranslation();
 	const { appTheme } = useThemeColor();
 
-	useEffect(() => {
-		setTranslation(translationGetters);
-	}, [setTranslation]);
+	setTranslation(translationGetters);
 
 	useEffect(() => {
 		if (!isAuthInitialized) {
